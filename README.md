@@ -7,7 +7,7 @@ git clone https://gitlab-se.eeecs.qub.ac.uk/CSC3032-2425/CSC3032-2425-TEAM23.git
 
 ### Information
 - Build using `gradle build`
-- In IntelliJ click the green arrow to the left of the class to run it
+- In IntelliJ click the green arrow to the left of the class to run it.
 - Testing through JUnit and Mockito
 
 ### Dependency Management

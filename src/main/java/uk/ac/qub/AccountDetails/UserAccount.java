@@ -1,12 +1,9 @@
  package uk.ac.qub.AccountDetails;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-// UserAccount class representing a user's account with email, password, and user ID.
+
+ // UserAccount class representing a user's account with email, password, and user ID.
 public class UserAccount {
     private int userId;
     private String username;
@@ -31,4 +28,5 @@ public class UserAccount {
         return password;
     }
 }
+
 

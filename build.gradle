@@ -1,17 +1,41 @@
 plugins {
+    id 'org.springframework.boot' version '3.+'
+    id 'io.spring.dependency-management' version '1.0.+'
     id 'java'
+    id "io.snyk.gradle.plugin.snykplugin" version "0.+"
 }
 
 group = 'uk.ac.qub'
-version = '1.0-SNAPSHOT'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '21'
+
+dependencyLocking {
+    lockAllConfigurations()
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.+'
+    implementation 'mysql:mysql-connector-java:8.0.+'
+    testImplementation platform('org.junit:junit-bom:5.10.+')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+snyk {
+    api = 'e3bdf5de-b20b-4364-be82-3b858a7c6d49'
+    severity = 'low'
+    autoDownload = true
+    autoUpdate = true
+    arguments = '--all-sub-projects'
 }
 
 test {

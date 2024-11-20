@@ -18,12 +18,15 @@ public class SecurityConfig {
                                 .requestMatchers("/register", "/login").permitAll()
                                 .anyRequest().authenticated()
                 )
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/home", true)
-                .and()
-                .logout()
-                .permitAll();
+                .formLogin(formLogin ->
+                        formLogin
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/home", true)
+                )
+                .logout(logout ->
+                        logout
+                                .permitAll()
+                );
 
         return http.build();
     }

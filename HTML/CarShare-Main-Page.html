@@ -61,10 +61,10 @@
 <div id="map"></div>
 
 <nav>
-    <button id="findRidesBtn" class="nav-button">Find Rides</button>
-    <button class="nav-button">Offer Ride</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Main-Page.html'">Create a Journey</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Join-a-Journey-Page.html'">Journeys</button>
     <button class="nav-button">My Profile</button>
-    <button class="nav-button">Settings</button>
+    <button class="nav-button" onclick="window.location.href='SettingsPage.html'">Settings</button>
 </nav>
 
 <script>
@@ -111,8 +111,8 @@
             );
         }
 
-        // Find Rides button event listener
-        document.getElementById('findRidesBtn').addEventListener('click', findRides);
+        // Create a Journey button event listener
+        document.getElementById('CreateJourneybtn').addEventListener('click', CreateJourney);
     }
 
     function placeMarker(location) {
@@ -158,7 +158,7 @@
         );
     }
 
-    function findRides() {
+    function CreateJourney() {
         // Validate journey (check if 2 markers exist)
         if (markers.length !== 2) {
             alert('Please select start and end points on the map');
@@ -166,7 +166,7 @@
         }
 
         // Prompt for journey details
-        const passengers = prompt('How many passengers do you need?');
+        const passengers = prompt('How many passengers can you have?');
         const date = prompt('Enter date for the journey (YYYY-MM-DD):');
         const time = prompt('Enter time for the journey (HH:MM):');
 

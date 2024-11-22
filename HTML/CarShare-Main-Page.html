@@ -178,6 +178,12 @@ Date: ${date}
 Time: ${time}`);
         }
     }
+
+    document.getElementById('settingsBtn').addEventListener('click', OpenSettingPage);
+
+    function OpenSettingPage() {
+        window.location.href = "SettingsPage.html";
+    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbzDS0oDf93XMg2E_gw0dp2I2SNqmgfQs&callback=initMap" async defer></script>
 </body>

@@ -3,21 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <title>Carshare-Landing-Page</title>
+    <style>
+        /* Import modern fonts: Poppins and Montserrat */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400&display=swap');
+
+        /* General body styling */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: black;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+
+        /* Make the background image cover the entire page */
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Ensure it stays in the background */
+        }
+
+        /* Centralize content */
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1; /* Ensure content is above the background */
+        }
+
+        /* Style for the main title */
+        .main-title {
+            font-family: 'Montserrat', sans-serif; /* Trendy font */
+            font-size: 100px; /* Larger, modern size */
+            color: #2ECC71; /* Updated green for a more modern look */
+            font-weight: 700; /* Bold for emphasis */
+            letter-spacing: 6.4px; /* Spaced-out letters */
+            text-shadow: 4px 3px #000000; /* More prominent shadow for depth */
+            margin-bottom: 50px; /* Space between title and buttons */
+        }
+
+        /* Style for buttons */
+        button {
+            background: #2C3E97;
+            width: 350px;
+            height: 69px;
+            color: white;
+            font-size: 32px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px; /* Rounded edges for better visibility */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for better contrast */
+        }
+
+        /* Button spacing */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    </style>
 </head>
 <body>
-<div style="width: 100%; height: 100%; position: relative; background: white">
-    <img style="width: 1280px; height: 720px; left: 0px; top: 0px; position: absolute" src="opening%20screen%20for%20project.png" />
-    <a href="Login.html"> <button type="button" onclick="MoveLogin()" style="background: #2C3E97; width: 350px; height: 69px; left: 451px; top: 397px; position: absolute; text-align: center; color: white; font-size: 48px; font-family: Jockey One; font-weight: 400; letter-spacing: 4.80px; word-wrap: break-word">Login</button></a>
-    <div style="width: 700px; height: 100px; left: 290px; top: 58px; position: absolute; text-align: center; color: #48FF4E; font-size: 64px; font-family: Jockey One; font-weight: 400; letter-spacing: 6.40px; word-wrap: break-word; text-shadow: 3px 2px #000000">Carshare</div>
-    <a href="CarShare-Signup-Page.html"> <button type="button" onclick="MoveRegister()" style="background: #4E5FB7; width: 350px; height: 69px; left: 451px; top: 530px; position: absolute; text-align: center; color: white; font-size: 48px; font-family: Jockey One; font-weight: 400; letter-spacing: 4.80px; word-wrap: break-word">Register</button></a>
+<!-- Fullscreen background image -->
+<img class="background-image" src="CarShare-Opening-Image.jpeg" alt="Carshare Background">
+
+<!-- Centralized content -->
+<div class="content">
+    <!-- Main title -->
+    <div class="main-title">CarShare</div>
+
+    <!-- Buttons -->
+    <div class="button-group">
+        <a href="Login.html">
+            <button>Login</button>
+        </a>
+        <a href="CarShare-Signup-Page.html">
+            <button>Register</button>
+        </a>
+    </div>
 </div>
-
-<script>
-    function MoveLogin() {
-
-    }
-
-</script>
 </body>
-
 </html>

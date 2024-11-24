@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journey Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,26 +13,48 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             height: 100vh;
+            background-color: #ecf0f1;
+            overflow: hidden; /* Prevent scrolling */
         }
 
+        /* Map Styling */
         #map {
             flex-grow: 1;
-            width: 70%;
+            width: 100%; /* Map takes full width */
+            height: 100vh;
+            border-radius: 12px; /* Rounded map corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* Floating Journey Info Bubble Styling */
         #journey-info {
-            width: 30%;
-            background-color: #f4f4f4;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px; /* Adjust width of the bubble */
+            background-color: #ffffff;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
         }
 
-        .journey-details {
-            flex-grow: 1;
+        .journey-details h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            color: #34495e;
+            margin-bottom: 10px;
+        }
+
+        .journey-details p {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
         }
 
         .journey-actions {
@@ -41,20 +64,47 @@
         }
 
         .journey-btn {
-            padding: 10px;
+            padding: 12px 20px;
             background-color: #3498db;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .journey-btn:hover {
             background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .journey-btn:focus {
+            outline: none;
+        }
+
+        /* Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            #journey-info {
+                width: 80%;
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .journey-details h2 {
+                font-size: 18px;
+            }
+
+            .journey-btn {
+                width: 48%;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
+
 <div id="map"></div>
 <div id="journey-info">
     <div class="journey-details">
@@ -106,9 +156,9 @@
                 if (status === 'OK') {
                     directionsRenderer.setDirections(response);
                     const route = response.routes[0].legs[0];
-                    document.getElementById('journey-distance').textContent = 
+                    document.getElementById('journey-distance').textContent =
                         `Distance: ${route.distance.text}`;
-                    document.getElementById('journey-duration').textContent = 
+                    document.getElementById('journey-duration').textContent =
                         `Duration: ${route.duration.text}`;
                 } else {
                     console.error('Directions request failed due to ' + status);
@@ -118,7 +168,6 @@
     }
 
     function goBackToJourneys() {
-        // This would typically be replaced with actual navigation logic
         window.location.href = 'CarShare-Join-a-Journey-Page.html';
     }
 
@@ -127,6 +176,8 @@
         window.location.href = 'CarShare-Main-Page.html';
     }
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbzDS0oDf93XMg2E_gw0dp2I2SNqmgfQs&callback=initMap" async defer></script>
+
 </body>
 </html>

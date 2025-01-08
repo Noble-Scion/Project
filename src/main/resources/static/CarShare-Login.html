@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CarShare - Sign Up</title>
+    <title>CarShare - Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="icon" href="images/car.png">
     <style>
-        /* Reset and general styling */
         * {
             margin: 0;
             padding: 0;
@@ -18,10 +17,9 @@
             font-family: 'Poppins', sans-serif;
             color: black;
             margin: 0;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: hidden;
         }
 
-        /* Background image */
         .background-image {
             position: absolute;
             top: 0;
@@ -29,10 +27,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1; /* Keep it behind all other content */
+            z-index: -1;
         }
 
-        /* Centralized content */
         .content {
             position: absolute;
             top: 50%;
@@ -43,9 +40,8 @@
             text-align: center;
         }
 
-        /* Header section */
         .header-card {
-            background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            background: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 12px 12px 0 0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -54,7 +50,7 @@
 
         .header-title {
             font-size: 32px;
-            color: #2ECC71; /* Modern green color */
+            color: #2ECC71;
             font-weight: 700;
             letter-spacing: 2px;
             margin-bottom: 10px;
@@ -65,9 +61,8 @@
             color: #49454F;
         }
 
-        /* Signup form styling */
-        .signup-form {
-            background: rgba(255, 255, 255, 0.9); /* Semi-transparent form */
+        .login-form {
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 0 0 12px 12px;
             padding: 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -97,7 +92,7 @@
         }
 
         .form-input:focus {
-            border-color: #2ECC71; /* Green border on focus */
+            border-color: #2ECC71;
             box-shadow: 0 0 4px rgba(46, 204, 113, 0.5);
         }
 
@@ -111,8 +106,7 @@
             display: none;
         }
 
-        /* Register button */
-        .register-button {
+        .login-button {
             width: 100%;
             padding: 14px;
             background: #2C3E97;
@@ -123,36 +117,83 @@
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-bottom: 15px;
         }
 
-        .register-button:hover {
+        .login-button:hover {
             background: #404CB7;
         }
 
-        .register-button:disabled {
+        .login-button:disabled {
             background: #B3B3B3;
             cursor: not-allowed;
+        }
+
+        .forgot-password {
+            color: #2C3E97;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: #404CB7;
+            text-decoration: underline;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            color: #2C3E97;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-<!-- Fullscreen background image -->
 <img class="background-image" src="images/CarShare-Opening-Image.jpeg" alt="Background Image">
 
-<!-- Centralized content -->
 <div class="content">
-    <!-- Header -->
     <div class="header-card">
-        <div class="header-title">Sign Up to CarShare</div>
-        <div class="header-subtitle">Did you mean to <a href="CarShare-Login.html" style="color: #2C3E97; text-decoration: none;">log in?</a></div>
+        <div class="header-title">Login to CarShare</div>
+        <div class="header-subtitle">Did you mean to <a href="CarShare-Signup-Page.html" style="color: #2C3E97; text-decoration: none;">sign up?</a></div>
     </div>
 
-    <!-- Signup form -->
-    <form class="signup-form" id="signupForm" novalidate>
+    <form class="login-form" id="loginForm" novalidate>
         <div class="form-group">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
-            <div id="emailError" class="validation-message">Please enter a valid email address</div>
+            <label for="username" class="form-label">Username/Email</label>
+            <input type="text" id="username" class="form-input" placeholder="Enter your username/Email" required>
         </div>
 
         <div class="form-group">
@@ -161,25 +202,33 @@
             <div id="passwordError" class="validation-message">Password must be at least 8 characters and contain uppercase, lowercase, number, and special character</div>
         </div>
 
-        <button type="submit" class="register-button" disabled>Register</button>
+        <button type="submit" class="login-button" disabled>Login</button>
+        <a class="forgot-password" onclick="showForgotPasswordModal()">Forgot your password?</a>
     </form>
 </div>
 
+<!-- Forgot Password Modal -->
+<div id="forgotPasswordModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeForgotPasswordModal()">&times;</span>
+        <h2 class="modal-title">Reset Password</h2>
+        <form id="resetPasswordForm">
+            <div class="form-group">
+                <label for="resetEmail" class="form-label">Email Address</label>
+                <input type="email" id="resetEmail" class="form-input" placeholder="Enter your email" required>
+            </div>
+            <button type="submit" class="login-button">Send Reset Link</button>
+        </form>
+    </div>
+</div>
+
 <script>
-    const form = document.getElementById('signupForm');
-    const emailInput = document.getElementById('email');
+    const form = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
-    const emailError = document.getElementById('emailError');
     const passwordError = document.getElementById('passwordError');
-    const registerButton = document.querySelector('.register-button');
-
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-
-    function validateEmail() {
-        const isValid = emailRegex.test(emailInput.value);
-        emailError.style.display = isValid ? 'none' : 'block';
-        return isValid;
-    }
+    const loginButton = document.querySelector('.login-button');
+    const modal = document.getElementById('forgotPasswordModal');
 
     function validatePassword() {
         const password = passwordInput.value;
@@ -195,18 +244,48 @@
     }
 
     function validateForm() {
-        const isEmailValid = validateEmail();
         const isPasswordValid = validatePassword();
-        registerButton.disabled = !(isEmailValid && isPasswordValid);
+        loginButton.disabled = !isPasswordValid;
     }
 
-    emailInput.addEventListener('input', validateForm);
     passwordInput.addEventListener('input', validateForm);
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        if (validateEmail() && validatePassword()) {
+        if (validatePassword()) {
             window.location.href = "CarShare-Main-Page.html";
+        }
+    });
+
+    // Modal functions
+    function showForgotPasswordModal() {
+        modal.style.display = 'flex';
+    }
+
+    function closeForgotPasswordModal() {
+        modal.style.display = 'none';
+    }
+
+    // Close modal if clicking outside
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            closeForgotPasswordModal();
+        }
+    }
+
+    // Handle password reset form submission
+    document.getElementById('resetPasswordForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('resetEmail').value;
+
+        try {
+            // Here you would typically make an API call to your backend
+            // For now, we'll just show a success message
+            alert('If an account exists with this email, you will receive password reset instructions shortly.');
+            closeForgotPasswordModal();
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again later.');
         }
     });
 </script>

@@ -15,225 +15,385 @@
 
         body {
             font-family: 'Poppins', sans-serif;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            color: #333;
-            overflow: hidden; /* Prevent any overflow that causes scrolling */
+            overflow: hidden;
         }
 
-        /* Header Styling */
         header {
-            background-color: rgba(44, 62, 80, 0.9); /* Semi-transparent background */
+            background-color: #2c3e50;
             color: white;
             padding: 1rem;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            font-family: 'Montserrat', sans-serif;
-            border-radius: 0 0 12px 12px; /* Rounded corners */
-            z-index: 1;
         }
 
         header h1 {
             font-size: 36px;
-            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        /* Fullscreen Map Styling */
-        #map {
-            flex-grow: 1;
-            width: 100%;
-            height: 100%;  /* Fill the remaining height */
-            border-radius: 12px;
-            margin-top: 0;
-            margin-bottom: 0;
-            z-index: 0; /* Ensure the map is behind other elements */
-        }
-
-        /* Navigation Bar Styling */
-        nav {
-            background-color: rgba(52, 152, 219, 0.9); /* Semi-transparent background */
-            padding: 1rem;
+        .main-container {
+            flex: 1;
+            position: relative;
             display: flex;
-            justify-content: space-around;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        #journey-form {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 350px;
+            background: white;
+            padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             z-index: 1;
         }
 
-        .nav-button {
-            background-color: #3498db;
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .location-info {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .create-journey-btn {
+            width: 100%;
+            padding: 10px;
+            background: #2C3E97;
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
             font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav {
+            background-color: #3498db;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .nav-button:hover {
-            background-color: #2980b9;
+            background: #2980b9;
             transform: scale(1.05);
         }
 
-        .nav-button:focus {
-            outline: none;
-        }
-
-        /* Media Queries for responsiveness */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 28px;
+            #journey-form {
+                width: 90%;
+                left: 5%;
+                right: 5%;
             }
 
             nav {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .nav-button {
-                margin-bottom: 10px;
-                width: 100%;
+                flex-wrap: wrap;
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>CarShare</h1>
+    </header>
 
-<header>
-    <h1>CarShare</h1>
-</header>
+    <div class="main-container">
+        <div id="map"></div>
+        <div id="journey-form">
+            <h3 style="margin-bottom: 15px;">Create a Journey</h3>
+            
+            <div class="location-info">
+                <p><strong>Start:</strong> <span id="start-location">Click on map</span></p>
+                <p><strong>End:</strong> <span id="end-location">Click on map</span></p>
+            </div>
 
-<div id="map"></div>
+            <div class="form-group">
+                <label class="form-label" for="journey-date">Date</label>
+                <input type="date" id="journey-date" class="form-input" required>
+            </div>
 
-<nav>
-    <button class="nav-button" id="CreateJourneybtn">Create a Journey</button>
-    <button class="nav-button" onclick="window.location.href='CarShare-Join-a-Journey-Page.html'">Journeys</button>
-    <button class="nav-button" onclick="window.location.href='CarShare-Profile-Page.html'">My Profile</button>
-    <button class="nav-button" onclick="window.location.href='CarShare-Settings-Page.html'">Settings</button>
-</nav>
+            <div class="form-group">
+                <label class="form-label" for="journey-time">Time</label>
+                <input type="time" id="journey-time" class="form-input" required>
+            </div>
 
-<script>
-    let map;
-    let markers = [];
-    let directionsService;
-    let directionsRenderer;
+            <div class="form-group">
+                <label class="form-label" for="available-seats">Available Seats</label>
+                <input type="number" id="available-seats" class="form-input" min="1" max="8" value="1" required>
+            </div>
 
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 51.5074, lng: -0.1278 },
-            zoom: 13,
-            styles: [
-                {
-                    featureType: "poi",
-                    elementType: "labels",
-                    stylers: [{ visibility: "off" }]
+            <button class="create-journey-btn" onclick="createJourney()">Create Journey</button>
+        </div>
+    </div>
+
+    <nav>
+        <button class="nav-button" onclick="window.location.href='CarShare-Main-Page.html'">Create a Journey</button>
+        <button class="nav-button" onclick="window.location.href='CarShare-Join-a-Journey-Page.html'">Journeys</button>
+        <button class="nav-button" onclick="window.location.href='CarShare-Profile-Page.html'">My Profile</button>
+        <button class="nav-button" onclick="window.location.href='CarShare-Settings-Page.html'">Settings</button>
+    </nav>
+
+    <script>
+        let map;
+        let markers = [];
+        let directionsService;
+        let directionsRenderer;
+        let geocoder;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 54.5973, lng: -5.9301 }, // Centered on Belfast
+                zoom: 12,
+                styles: [
+                    {
+                        featureType: "poi",
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    }
+                ]
+            });
+
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+            geocoder = new google.maps.Geocoder();
+
+            // Enable marker placement
+            map.addListener('click', (event) => {
+                placeMarker(event.latLng);
+            });
+
+            // Get user's location if permitted
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        map.setCenter(pos);
+                    },
+                    () => {
+                        console.log("Error: The Geolocation service failed.");
+                    }
+                );
+            }
+
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('journey-date').min = today;
+        }
+
+        function placeMarker(location) {
+            // Limit to 2 markers
+            if (markers.length >= 2) {
+                markers[0].setMap(null);
+                markers.shift();
+            }
+
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                draggable: true
+            });
+
+            markers.push(marker);
+
+            // Update location info
+            updateLocationInfo();
+
+            // If we have 2 markers, draw route
+            if (markers.length === 2) {
+                calculateAndDisplayRoute();
+            }
+
+            // Add dragend event listener
+            marker.addListener('dragend', () => {
+                updateLocationInfo();
+                if (markers.length === 2) {
+                    calculateAndDisplayRoute();
                 }
-            ]
-        });
+            });
+        }
 
-        directionsService = new google.maps.DirectionsService();
-        directionsRenderer = new google.maps.DirectionsRenderer();
-        directionsRenderer.setMap(map);
+        function updateLocationInfo() {
+            const startSpan = document.getElementById('start-location');
+            const endSpan = document.getElementById('end-location');
 
-        // Enable marker placement
-        map.addListener('click', (event) => {
-            placeMarker(event.latLng);
-        });
+            if (markers.length > 0) {
+                const startPos = markers[0].getPosition();
+                geocoder.geocode({ location: startPos }, (results, status) => {
+                    if (status === 'OK' && results[0]) {
+                        startSpan.textContent = results[0].formatted_address;
+                    } else {
+                        startSpan.textContent = `${startPos.lat().toFixed(4)}, ${startPos.lng().toFixed(4)}`;
+                    }
+                });
+            }
 
-        // Get user's location if permitted
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    };
-                    map.setCenter(pos);
+            if (markers.length > 1) {
+                const endPos = markers[1].getPosition();
+                geocoder.geocode({ location: endPos }, (results, status) => {
+                    if (status === 'OK' && results[0]) {
+                        endSpan.textContent = results[0].formatted_address;
+                    } else {
+                        endSpan.textContent = `${endPos.lat().toFixed(4)}, ${endPos.lng().toFixed(4)}`;
+                    }
+                });
+            }
+        }
+
+        function calculateAndDisplayRoute() {
+            if (markers.length !== 2) return;
+
+            directionsService.route(
+                {
+                    origin: markers[0].getPosition(),
+                    destination: markers[1].getPosition(),
+                    travelMode: 'DRIVING'
                 },
-                () => {
-                    console.log("Error: The Geolocation service failed.");
+                (response, status) => {
+                    if (status === 'OK') {
+                        directionsRenderer.setDirections(response);
+                    } else {
+                        console.error('Directions request failed due to ' + status);
+                    }
                 }
             );
         }
 
-        // Create a Journey button event listener
-        document.getElementById('CreateJourneybtn').addEventListener('click', CreateJourney);
-    }
-
-    function placeMarker(location) {
-        // Limit to 2 markers
-        if (markers.length >= 2) {
-            markers[0].setMap(null);
-            markers.shift();
-        }
-
-        const marker = new google.maps.Marker({
-            position: location,
-            map: map,
-            draggable: true
-        });
-
-        markers.push(marker);
-
-        // If we have 2 markers, draw route
-        if (markers.length === 2) {
-            calculateAndDisplayRoute();
-        }
-    }
-
-    function calculateAndDisplayRoute() {
-        if (markers.length !== 2) return;
-
-        directionsService.route(
-            {
-                origin: markers[0].getPosition(),
-                destination: markers[1].getPosition(),
-                travelMode: 'DRIVING'
-            },
-            (response, status) => {
-                if (status === 'OK') {
-                    directionsRenderer.setDirections(response);
-                    const distance = response.routes[0].legs[0].distance.text;
-                    const duration = response.routes[0].legs[0].duration.text;
-                    console.log(`Distance: ${distance}, Duration: ${duration}`);
-                } else {
-                    console.error('Directions request failed due to ' + status);
-                }
+        function validateForm() {
+            if (markers.length !== 2) {
+                alert('Please select both start and end locations on the map');
+                return false;
             }
-        );
-    }
 
-    function CreateJourney() {
-        // Validate journey (check if 2 markers exist)
-        if (markers.length !== 2) {
-            alert('Please select start and end points on the map');
-            return;
+            const date = document.getElementById('journey-date').value;
+            const time = document.getElementById('journey-time').value;
+            const seats = document.getElementById('available-seats').value;
+
+            if (!date || !time || !seats) {
+                alert('Please fill in all fields');
+                return false;
+            }
+
+            const dateTime = new Date(date + 'T' + time);
+            if (dateTime < new Date()) {
+                alert('Please select a future date and time');
+                return false;
+            }
+
+            return true;
         }
 
-        // Prompt for journey details
-        const passengers = prompt('How many passengers can you have?');
-        const date = prompt('Enter date for the journey (YYYY-MM-DD):');
-        const time = prompt('Enter time for the journey (HH:MM):');
+        async function createJourney() {
+            if (!validateForm()) return;
 
-        if (passengers && date && time) {
-            // Here you would typically save the journey details
-            alert(`Journey created:
-Passengers: ${passengers}
-Date: ${date}
-Time: ${time}`);
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                window.location.href = 'CarShare-Login.html';
+                return;
+            }
+
+            try {
+                // Get addresses using geocoder
+                const startPos = markers[0].getPosition();
+                const endPos = markers[1].getPosition();
+                
+                const [startResult, endResult] = await Promise.all([
+                    new Promise((resolve, reject) => {
+                        geocoder.geocode({ location: startPos }, (results, status) => {
+                            if (status === 'OK' && results[0]) {
+                                resolve(results[0].formatted_address);
+                            } else {
+                                reject(new Error('Failed to get start address'));
+                            }
+                        });
+                    }),
+                    new Promise((resolve, reject) => {
+                        geocoder.geocode({ location: endPos }, (results, status) => {
+                            if (status === 'OK' && results[0]) {
+                                resolve(results[0].formatted_address);
+                            } else {
+                                reject(new Error('Failed to get end address'));
+                            }
+                        });
+                    })
+                ]);
+
+                const journeyData = {
+                    driverId: parseInt(userId),
+                    startLat: startPos.lat(),
+                    startLng: startPos.lng(),
+                    endLat: endPos.lat(),
+                    endLng: endPos.lng(),
+                    startAddress: startResult,
+                    endAddress: endResult,
+                    journeyDateTime: new Date(
+                        document.getElementById('journey-date').value + 'T' + 
+                        document.getElementById('journey-time').value
+                    ).toISOString(),
+                    availableSeats: parseInt(document.getElementById('available-seats').value)
+                };
+
+                const response = await fetch('/api/journeys/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(journeyData)
+                });
+
+                if (response.ok) {
+                    alert('Journey created successfully!');
+                    window.location.href = 'CarShare-Join-a-Journey-Page.html';
+                } else {
+                    const error = await response.text();
+                    alert('Error creating journey: ' + error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while creating the journey');
+            }
         }
-    }
+    </script>
 
-    document.getElementById('settingsBtn').addEventListener('click', OpenSettingPage);
-
-    function OpenSettingPage() {
-        window.location.href = "SettingsPage.html";
-    }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbzDS0oDf93XMg2E_gw0dp2I2SNqmgfQs&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbzDS0oDf93XMg2E_gw0dp2I2SNqmgfQs&callback=initMap" async defer></script>
 </body>
 </html>

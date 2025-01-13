@@ -30,6 +30,9 @@ public class User {
     @Column
     private LocalDateTime resetTokenExpiry;
 
+    @Column
+    private String homeAddress;
+
     // Constructors
     public User() {
         this.createdAt = LocalDateTime.now();
@@ -99,5 +102,13 @@ public class User {
 
     public void setResetTokenExpiry(LocalDateTime resetTokenExpiry) {
         this.resetTokenExpiry = resetTokenExpiry;
+    }
+
+    public String getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(String homeAddress) {
+        this.homeAddress = homeAddress;
     }
 }

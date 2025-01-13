@@ -340,40 +340,44 @@
 
         // Login form submission
         form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const email = emailInput.value;
-            const password = passwordInput.value;
+        e.preventDefault();
 
-            emailError.style.display = validateEmail(email) ? 'none' : 'block';
-            passwordError.style.display = validatePassword(password) ? 'none' : 'block';
+        const email = emailInput.value;
+        const password = passwordInput.value;
 
-            if (validateEmail(email) && validatePassword(password)) {
-                showSpinner(loginButton);
+        emailError.style.display = validateEmail(email) ? 'none' : 'block';
+        passwordError.style.display = validatePassword(password) ? 'none' : 'block';
 
-                try {
-                    const response = await fetch('/api/auth/login', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ email, password })
-                    });
+        if (validateEmail(email) && validatePassword(password)) {
+            showSpinner(loginButton);
 
-                    if (response.ok) {
-                        window.location.href = 'CarShare-Main-Page.html';
-                    } else {
-                        const error = await response.text();
-                        showError('Invalid email or password');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    showError('An error occurred during login');
-                } finally {
-                    hideSpinner(loginButton);
+            try {
+
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('userId', data.userId);
+                    window.location.href = 'CarShare-Main-Page.html';
+                } else {
+                    const error = await response.text();
+                    showError('Invalid email or password');
                 }
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An error occurred during login');
+            } finally {
+                hideSpinner(loginButton);
             }
-        });
+        }
+    });
 
         // Close modal when clicking outside
         window.addEventListener('click', (e) => {

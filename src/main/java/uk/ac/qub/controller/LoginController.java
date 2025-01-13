@@ -34,7 +34,10 @@ public class LoginController {
             if (passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
                 user.setLastLogin(LocalDateTime.now());
                 userRepository.save(user);
-                return ResponseEntity.ok().build();
+                
+                LoginResponse response = new LoginResponse();
+                response.setUserId(user.getUserId());
+                return ResponseEntity.ok(response);
             }
         }
         
@@ -52,7 +55,6 @@ public class LoginController {
             user.setResetTokenExpiry(LocalDateTime.now().plusHours(24));
             userRepository.save(user);
 
-            // Send reset email
             String resetLink = "http://localhost:8080/reset-password?token=" + resetToken;
             String emailBody = String.format(
                 "Hello,\n\nYou have requested to reset your password. Please click the link below to reset it:\n\n%s\n\n" +
@@ -60,11 +62,10 @@ public class LoginController {
                 "Best regards,\nCarShare Team", resetLink);
 
             emailService.sendEmail(request.getEmail(), "Password Reset Request", emailBody);
-            
             return ResponseEntity.ok().build();
         }
         
-        return ResponseEntity.ok().build(); // Return OK even if email not found for security
+        return ResponseEntity.ok().build();
     }
 }
 
@@ -72,11 +73,17 @@ class LoginRequest {
     private String email;
     private String password;
 
-    // Getters and setters
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+}
+
+class LoginResponse {
+    private Long userId;
+
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 }
 
 class ForgotPasswordRequest {

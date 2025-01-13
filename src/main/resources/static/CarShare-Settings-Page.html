@@ -20,10 +20,9 @@
             height: 100vh;
             color: #333;
             overflow: hidden;
-            position: relative; /* Ensure content appears above the image */
+            position: relative;
         }
 
-        /* Fullscreen background image */
         .background-image {
             position: absolute;
             top: 0;
@@ -31,7 +30,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1; /* Make sure the image stays behind other content */
+            z-index: -1;
         }
 
         header {
@@ -49,7 +48,6 @@
             letter-spacing: 2px;
         }
 
-        /* Main content styling */
         #settings-content {
             flex-grow: 1;
             padding: 20px;
@@ -91,7 +89,6 @@
             outline: none;
         }
 
-        /* Media Queries for responsiveness */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 28px;
@@ -105,7 +102,6 @@
 </head>
 <body>
 
-<!-- Fullscreen background image -->
 <img class="background-image" src="images/CarShare-Opening-Image.jpeg" alt="Background Image">
 
 <header>
@@ -124,39 +120,159 @@
 </div>
 
 <script>
-    let homeAddress = null;
-    let bugDescription = null;
-
-    document.getElementById('addHomeBtn').addEventListener('click', AddHome);
-    document.getElementById('disableAccountBtn').addEventListener('click', DisableAccount);
-    document.getElementById('deleteAccountBtn').addEventListener('click', DeleteAccount);
-    document.getElementById('signOutBtn').addEventListener('click', SignOut);
-    document.getElementById('reportBugBtn').addEventListener('click', ReportBug);
-    document.getElementById('backToMainPageBtn').addEventListener('click', OpenMainPage);
-
-    function AddHome() {
-        homeAddress = prompt('Please enter your home address:', '');
+    function checkAuth() {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            window.location.href = 'CarShare-Login.html';
+        }
+        return userId;
     }
 
-    function DisableAccount() {
-        alert('Account disabled');
+    async function AddHome() {
+        const userId = checkAuth();
+        if (!userId) return;
+
+        const homeAddress = prompt('Please enter your home address:', '');
+        if (!homeAddress) return;
+
+        try {
+            const response = await fetch('/api/settings/home-address', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: parseInt(userId),
+                    homeAddress: homeAddress
+                })
+            });
+
+            if (response.ok) {
+                alert('Home address saved successfully');
+            } else {
+                const error = await response.text();
+                alert('Error saving home address: ' + error);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while saving home address');
+        }
     }
 
-    function DeleteAccount() {
-        alert('Account deleted');
+    async function DisableAccount() {
+        const userId = checkAuth();
+        if (!userId) return;
+
+        const confirmed = confirm('Are you sure you want to disable your account? You can reactivate it later.');
+        if (!confirmed) return;
+
+        try {
+            const response = await fetch('/api/settings/disable-account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: parseInt(userId)
+                })
+            });
+
+            if (response.ok) {
+                alert('Account disabled successfully');
+                SignOut();
+            } else {
+                const error = await response.text();
+                alert('Error disabling account: ' + error);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while disabling account');
+        }
+    }
+
+    async function DeleteAccount() {
+        const userId = checkAuth();
+        if (!userId) return;
+
+        const confirmed = confirm('Are you sure you want to delete your account? This action cannot be undone.');
+        if (!confirmed) return;
+
+        try {
+            const response = await fetch('/api/settings/delete-account', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: parseInt(userId)
+                })
+            });
+
+            if (response.ok) {
+                alert('Account deleted successfully');
+                SignOut();
+            } else {
+                const error = await response.text();
+                alert('Error deleting account: ' + error);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while deleting account');
+        }
+    }
+
+    async function ReportBug() {
+        const userId = checkAuth();
+        if (!userId) return;
+
+        const bugDescription = prompt('Please describe the nature of the bug:', '');
+        if (!bugDescription) return;
+
+        try {
+            const response = await fetch('/api/settings/report-bug', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: parseInt(userId),
+                    bugDescription: bugDescription
+                })
+            });
+
+            if (response.ok) {
+                alert('Bug report submitted successfully');
+            } else {
+                const error = await response.text();
+                alert('Error submitting bug report: ' + error);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while submitting bug report');
+        }
     }
 
     function SignOut() {
+        localStorage.clear();
+        sessionStorage.clear();
         window.location.href = "CarShare-Login.html";
-    }
-
-    function ReportBug() {
-        bugDescription = prompt('Please describe the nature of the bug:', '');
     }
 
     function OpenMainPage() {
         window.location.href = "CarShare-Main-Page.html";
     }
+
+    // Add event listeners when the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        checkAuth(); // Check authentication on page load
+        
+        document.getElementById('addHomeBtn').addEventListener('click', AddHome);
+        document.getElementById('disableAccountBtn').addEventListener('click', DisableAccount);
+        document.getElementById('deleteAccountBtn').addEventListener('click', DeleteAccount);
+        document.getElementById('signOutBtn').addEventListener('click', SignOut);
+        document.getElementById('reportBugBtn').addEventListener('click', ReportBug);
+        document.getElementById('backToMainPageBtn').addEventListener('click', OpenMainPage);
+    });
 </script>
 
 </body>

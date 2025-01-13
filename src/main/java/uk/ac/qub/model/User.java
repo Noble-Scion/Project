@@ -24,6 +24,12 @@ public class User {
     @Column(length = 20)
     private String accountStatus;
 
+    @Column
+    private String resetToken;
+
+    @Column
+    private LocalDateTime resetTokenExpiry;
+
     // Constructors
     public User() {
         this.createdAt = LocalDateTime.now();
@@ -33,6 +39,10 @@ public class User {
     // Getters and Setters
     public Long getUserId() {
         return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -55,6 +65,10 @@ public class User {
         return createdAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public LocalDateTime getLastLogin() {
         return lastLogin;
     }
@@ -69,5 +83,21 @@ public class User {
 
     public void setAccountStatus(String accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
+    public LocalDateTime getResetTokenExpiry() {
+        return resetTokenExpiry;
+    }
+
+    public void setResetTokenExpiry(LocalDateTime resetTokenExpiry) {
+        this.resetTokenExpiry = resetTokenExpiry;
     }
 }

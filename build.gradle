@@ -1,16 +1,14 @@
 plugins {
-    id 'org.springframework.boot' version '3.+'
-    id 'io.spring.dependency-management' version '1.0.+'
     id 'java'
-    id "io.snyk.gradle.plugin.snykplugin" version "0.+"
+    id 'org.springframework.boot' version '3.4.1'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'uk.ac.qub'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '21'
 
-dependencyLocking {
-    lockAllConfigurations()
+java {
+    sourceCompatibility = '17'
 }
 
 repositories {
@@ -19,26 +17,19 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.+'
-    implementation 'mysql:mysql-connector-java:8.0.+'
-    implementation 'com.google.firebase:firebase-admin:9.0.0'
-    testImplementation platform('org.junit:junit-bom:5.10.+')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-crypto'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'mysql:mysql-connector-java:8.0.28'
+
+    // Add these additional security dependencies
+    implementation 'org.springframework.security:spring-security-config'
+    implementation 'org.springframework.security:spring-security-web'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
 }
 
-snyk {
-    api = 'e3bdf5de-b20b-4364-be82-3b858a7c6d49'
-    severity = 'low'
-    autoDownload = true
-    autoUpdate = true
-    arguments = '--all-sub-projects'
-}
-
-test {
+tasks.named('test') {
     useJUnitPlatform()
 }

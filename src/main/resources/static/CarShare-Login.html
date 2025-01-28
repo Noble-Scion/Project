@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarShare - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/car.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: black;
+            margin: 0;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .login-header {
+            background: #2C3E97;
+            color: white;
+            padding: 30px 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .login-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .login-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .login-subtitle a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .login-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #2C3E97;
+            box-shadow: 0 0 0 3px rgba(44, 62, 151, 0.1);
+            outline: none;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background: #2C3E97;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .login-button:hover {
+            background: #3d4db4;
+            transform: translateY(-1px);
+        }
+
+        .login-button:active {
+            transform: translateY(1px);
+        }
+
+        .forgot-password {
+            color: #2C3E97;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 10px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .forgot-password:hover {
+            color: #3d4db4;
+            text-decoration: underline;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            color: #2C3E97;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #2C3E97;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <img class="background-image" src="images/CarShare-Opening-Image.jpeg" alt="Background Image">
+
+    <div class="content">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-title">Welcome Back!</div>
+                <div class="login-subtitle">New to CarShare? <a href="CarShare-Signup-Page.html">Sign up</a></div>
+            </div>
+
+            <form class="login-form" id="loginForm" novalidate>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                    <div id="emailError" class="error-message">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                    <div id="passwordError" class="error-message">Please enter your password</div>
+                </div>
+
+                <button type="submit" class="login-button">
+                    <span class="button-text">Login</span>
+                    <div class="spinner"></div>
+                </button>
+                
+                <button type="button" class="forgot-password" onclick="showForgotPasswordModal()">Forgot your password?</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title">Reset Password</h2>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="resetEmail" class="form-label">Email Address</label>
+                    <input type="email" id="resetEmail" class="form-input" placeholder="Enter your email" required>
+                </div>
+                <button type="submit" class="login-button">
+                    <span class="button-text">Send Reset Link</span>
+                    <div class="spinner"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const loginButton = document.querySelector('.login-button');
+        const modal = document.getElementById('forgotPasswordModal');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+
+        // Email validation regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        function validateEmail(email) {
+            return emailRegex.test(email);
+        }
+
+        function validatePassword(password) {
+            return password.length >= 6;
+        }
+
+        function showError(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+                toast.remove();
+            }, 3000);
+        }
+
+        function showSpinner(button) {
+            const spinner = button.querySelector('.spinner');
+            const text = button.querySelector('.button-text');
+            text.style.display = 'none';
+            spinner.style.display = 'block';
+            button.disabled = true;
+        }
+
+        function hideSpinner(button) {
+            const spinner = button.querySelector('.spinner');
+            const text = button.querySelector('.button-text');
+            text.style.display = 'block';
+            spinner.style.display = 'none';
+            button.disabled = false;
+        }
+
+        function showForgotPasswordModal() {
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Login form submission
+        form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        emailError.style.display = validateEmail(email) ? 'none' : 'block';
+        passwordError.style.display = validatePassword(password) ? 'none' : 'block';
+
+        if (validateEmail(email) && validatePassword(password)) {
+            showSpinner(loginButton);
+
+            try {
+
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('userId', data.userId);
+                    window.location.href = 'CarShare-Main-Page.html';
+                } else {
+                    const error = await response.text();
+                    showError('Invalid email or password');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An error occurred during login');
+            } finally {
+                hideSpinner(loginButton);
+            }
+        }
+    });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Forgot password form submission
+        forgotPasswordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('resetEmail').value;
+            if (!validateEmail(email)) {
+                showError('Please enter a valid email address');
+                return;
+            }
+
+            const submitButton = forgotPasswordForm.querySelector('.login-button');
+            showSpinner(submitButton);
+
+            try {
+                const response = await fetch('/api/auth/forgot-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                if (response.ok) {
+                    showError('Password reset instructions have been sent to your email');
+                    closeModal();
+                } else {
+                    showError('An error occurred. Please try again later.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An error occurred. Please try again later.');
+            } finally {
+                hideSpinner(submitButton);
+            }
+        });
+
+        // Input validation
+        emailInput.addEventListener('input', () => {
+            emailError.style.display = validateEmail(emailInput.value) ? 'none' : 'block';
+        });
+
+        passwordInput.addEventListener('input', () => {
+            passwordError.style.display = validatePassword(passwordInput.value) ? 'none' : 'block';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0739da91-08fa-4f58-a5dc-6c5ea3a7a455" name="Changes" comment="Updated Main Page">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/snyk.project.settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Friends-Page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Join-a-Journey-Page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Journey-Details.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/CarShare-LandingPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Main-Page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Profile-Page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Settings-Page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Signup-Page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/images/CarShare-Opening-Image.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/images/back-button.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/images/car.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/images/profile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/images/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/images/settings.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTML/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.lockfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/AccountDetails/UserAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/AccountDetails/UserAccountDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/FirebaseConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/UserRepository.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="CSC3032-2425-TEAM23" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Main-Page-Updated" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="SOFT" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;40331288&quot;,
+      &quot;fullname&quot;: &quot;40331288&quot;
+    }
+  }
+}</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;https://gitlab-se.eeecs.qub.ac.uk/CSC3032-2425/CSC3032-2425-TEAM23.git&quot;,
+    &quot;second&quot;: &quot;78da5a5d-310d-491b-af43-ca99cbc3c7a1&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2nn0lIp05pTKpvKuAq4mMn0ubLv" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build CSC3032-2425-TEAM23.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [dependencies].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CSC3032-2425-TEAM23 [:uk.ac.qub.CarShareApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CSC3032-2425-TEAM23 [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23/src/main/resources/static&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jamie\IdeaProjects\CSC3032-2425-TEAM23\src\main\resources\static" />
+      <recent name="C:\Users\jamie\IdeaProjects\CSC3032-2425-TEAM23\src\main\java\uk\ac\qub" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jamie\IdeaProjects\CSC3032-2425-TEAM23\HTML\images" />
+      <recent name="C:\Users\jamie\IdeaProjects\CSC3032-2425-TEAM23\HTML" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle build" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.CarShareApplication">
+    <configuration name="CarShareApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="uk.ac.qub.CarShareApplication" />
+      <module name="CSC3032-2425-TEAM23.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="uk.ac.qub.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CSC3032-2425-TEAM23 [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--refresh-dependencies --write-locks" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="dependencies" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="CarShareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="CSC3032-2425-TEAM23.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="uk.ac.qub.CarShareApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.CSC3032-2425-TEAM23 [clean]" />
+        <item itemvalue="Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [dependencies]" />
+        <item itemvalue="Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [build]" />
+        <item itemvalue="Application.CarShareApplication" />
+        <item itemvalue="Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0739da91-08fa-4f58-a5dc-6c5ea3a7a455" name="Changes" comment="" />
+      <created>1729593684196</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729593684196</updated>
+      <workItem from="1738101260117" duration="381000" />
+    </task>
+    <task id="LOCAL-00001" summary="test">
+      <option name="closed" value="true" />
+      <created>1729594333732</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1729594333732</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added Main Page &amp; Sign up Page">
+      <option name="closed" value="true" />
+      <created>1732015552211</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732015552211</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added Main Page &amp; Sign up Page">
+      <option name="closed" value="true" />
+      <created>1732098897102</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732098897102</updated>
+    </task>
+    <task id="LOCAL-00004" summary="KAN-40: Join a Journey">
+      <option name="closed" value="true" />
+      <created>1732299714395</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732299714395</updated>
+    </task>
+    <task id="LOCAL-00005" summary="KAN-40: Join a Journey, updated to allow buttons to be pressed">
+      <option name="closed" value="true" />
+      <created>1732301765683</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732301765683</updated>
+    </task>
+    <task id="LOCAL-00006" summary="KAN-40: Join a Journey, updated to allow buttons to be pressed &amp; add back button.png">
+      <option name="closed" value="true" />
+      <created>1732302852096</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732302852096</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Change main page, to link to other pages &amp; fix from findRides -&gt; create a journey instead">
+      <option name="closed" value="true" />
+      <created>1732303684179</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732303684180</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added Journey details page that links from journey page">
+      <option name="closed" value="true" />
+      <created>1732305933558</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1732305933558</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fixed issue, where create a journey never worked">
+      <option name="closed" value="true" />
+      <created>1732398053488</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1732398053488</updated>
+    </task>
+    <task id="LOCAL-00010" summary="**MAJOR UI ADJUSTMENTS** Also, Created a Profile Page">
+      <option name="closed" value="true" />
+      <created>1732407599172</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1732407599173</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Change page names, also added icons for each different page &amp; added a images folder not to clutter html folder">
+      <option name="closed" value="true" />
+      <created>1732409783326</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1732409783326</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Change page names, also added icons for each different page &amp; added a images folder not to clutter html folder">
+      <option name="closed" value="true" />
+      <created>1736298092839</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1736298092840</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Adding in the ability the press forget password and get sent an email to make a new one">
+      <option name="closed" value="true" />
+      <created>1736799834218</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1736799834218</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Updated Settings Page">
+      <option name="closed" value="true" />
+      <created>1736804619877</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1736804619877</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Updated Main Page">
+      <option name="closed" value="true" />
+      <created>1736806204319</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1736806204319</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Saving-User-Data" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test" />
+    <MESSAGE value="Added Main Page &amp; Sign up Page" />
+    <MESSAGE value="KAN-40: Join a Journey" />
+    <MESSAGE value="KAN-40: Join a Journey, updated to allow buttons to be pressed" />
+    <MESSAGE value="KAN-40: Join a Journey, updated to allow buttons to be pressed &amp; add back button.png" />
+    <MESSAGE value="Change main page, to link to other pages &amp; fix from findRides -&gt; create a journey instead" />
+    <MESSAGE value="Added Journey details page that links from journey page" />
+    <MESSAGE value="fixed issue, where create a journey never worked" />
+    <MESSAGE value="**MAJOR UI ADJUSTMENTS** Also, Created a Profile Page" />
+    <MESSAGE value="Change page names, also added icons for each different page &amp; added a images folder not to clutter html folder" />
+    <MESSAGE value="Adding in the ability the press forget password and get sent an email to make a new one" />
+    <MESSAGE value="Updated Settings Page" />
+    <MESSAGE value="Updated Main Page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Main Page" />
+  </component>
+</project>

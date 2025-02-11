@@ -4,48 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0739da91-08fa-4f58-a5dc-6c5ea3a7a455" name="Changes" comment="Updated Main Page">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/snyk.project.settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Friends-Page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Join-a-Journey-Page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Journey-Details.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/CarShare-LandingPage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Main-Page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Profile-Page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Settings-Page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/CarShare-Signup-Page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/images/CarShare-Opening-Image.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/images/back-button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/images/car.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/images/profile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/images/search.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/images/settings.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTML/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.lockfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/AccountDetails/UserAccount.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/AccountDetails/UserAccountDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/FirebaseConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/UserRepository.java" beforeDir="false" />
+    <list default="true" id="0739da91-08fa-4f58-a5dc-6c5ea3a7a455" name="Changes" comment="added firebase database to the backend and linked to project">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,36 +85,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Build CSC3032-2425-TEAM23.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [dependencies].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CSC3032-2425-TEAM23 [:uk.ac.qub.CarShareApplication.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CSC3032-2425-TEAM23 [clean].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23/src/main/resources/static&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build CSC3032-2425-TEAM23.executor": "Run",
+    "Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [build].executor": "Run",
+    "Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [dependencies].executor": "Run",
+    "Gradle.CSC3032-2425-TEAM23 [:uk.ac.qub.CarShareApplication.main()].executor": "Run",
+    "Gradle.CSC3032-2425-TEAM23 [clean].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23/src/main/resources/static",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jamie\IdeaProjects\CSC3032-2425-TEAM23\src\main\resources\static" />
       <recent name="C:\Users\jamie\IdeaProjects\CSC3032-2425-TEAM23\src\main\java\uk\ac\qub" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\callu\Documents\CSC3032\CSC3032-2425-TEAM23\src\main\resources\static" />
       <recent name="C:\Users\jamie\IdeaProjects\CSC3032-2425-TEAM23\HTML\images" />
       <recent name="C:\Users\jamie\IdeaProjects\CSC3032-2425-TEAM23\HTML" />
     </key>
@@ -264,8 +225,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.117" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.117" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -278,6 +239,7 @@
       <option name="presentableId" value="Default" />
       <updated>1729593684196</updated>
       <workItem from="1738101260117" duration="381000" />
+      <workItem from="1738264540947" duration="1983000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <option name="closed" value="true" />

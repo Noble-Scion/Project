@@ -196,32 +196,47 @@
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (validateEmail() && validatePassword()) {
-                try {
-                    const response = await fetch('/api/register', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            email: emailInput.value,
-                            password: passwordInput.value
-                        })
-                    });
+            if (!validateEmail() || !validatePassword()) {
+                return;
+            }
 
-                    if (response.ok) {
-                        window.location.href = "CarShare-Main-Page.html";
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: emailInput.value,
+                        password: passwordInput.value
+                    })
+                });
+
+                if (!response.ok) {
+                    console.error('Server Error:', response.status, response.statusText);
+                    emailError.style.display = 'block';
+
+                    // Display proper error message
+                    if (response.status === 404) {
+                        emailError.textContent = "Registration service not found. Please try again later.";
+                    } else if (response.status === 400) {
+                        const errorText = await response.text();
+                        emailError.textContent = errorText || "Invalid registration details.";
                     } else {
-                        const error = await response.text();
-                        emailError.style.display = 'block';
-                        emailError.textContent = error;
+                        emailError.textContent = "An unexpected error occurred. Please try again.";
                     }
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('An error occurred during registration. Please try again.');
+                    return;
                 }
+
+                console.log("Registration successful!");
+                window.location.href = "CarShare-Main-Page.html";
+
+            } catch (error) {
+                console.error('Network Error:', error);
+                alert("Network error. Please check your internet connection and try again.");
             }
         });
+
     </script>
 </body>
 </html>

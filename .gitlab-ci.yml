@@ -1,0 +1,78 @@
+image: eclipse-temurin:17-jdk-jammy
+
+stages:
+  - build
+  - test
+  - package
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  # Disable the Gradle daemon to ensure isolation and clean builds
+
+cache:
+  paths:
+    - .gradle/wrapper/
+    - .gradle/caches/
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+  - chmod +x ./gradlew
+
+build:
+  stage: build
+  script:
+    - ./gradlew assemble
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    expire_in: 1 week
+
+test:
+  stage: test
+  script:
+    - ./gradlew test
+  artifacts:
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
+
+code_quality:
+  stage: test
+  script:
+    - ./gradlew checkstyleMain
+  allow_failure: true
+
+package:
+  stage: package
+  script:
+    - ./gradlew bootJar
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    expire_in: 1 week
+  only:
+    - main
+    - develop
+
+build-docker:
+  stage: package
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    - |
+      if [ "$CI_COMMIT_REF_NAME" == "main" ]; then
+        docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG $CI_REGISTRY_IMAGE:latest
+        docker push $CI_REGISTRY_IMAGE:latest
+      fi
+  only:
+    - main
+    - develop
+    - tags
+
+# Deployment stages removed as requested

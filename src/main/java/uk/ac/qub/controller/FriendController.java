@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.qub.service.FriendService;
 import uk.ac.qub.dto.FriendRequestBody;
+import uk.ac.qub.model.Journey;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/friends")
@@ -36,6 +38,16 @@ public class FriendController {
     public ResponseEntity<?> getPendingRequests(@PathVariable Long userId) {
         try {
             return ResponseEntity.ok(friendService.getPendingRequests(userId));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/journeys/{userId}")
+    public ResponseEntity<?> getFriendJourneys(@PathVariable Long userId) {
+        try {
+            List<Journey> journeys = friendService.getFriendJourneys(userId);
+            return ResponseEntity.ok(journeys);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

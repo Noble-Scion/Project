@@ -2,6 +2,10 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.1'
     id 'io.spring.dependency-management' version '1.1.4'
+    id 'checkstyle'
+    id 'pmd'
+    id 'com.github.spotbugs' version '6.0.0'
+    id 'jacoco'
 }
 
 group = 'uk.ac.qub'
@@ -15,6 +19,13 @@ repositories {
     mavenCentral()
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.guava:guava:32.0.1-jre'
+        exclude group: 'com.google.collections', module: 'google-collections'
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -23,13 +34,50 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'mysql:mysql-connector-java:8.0.28'
 
-    // Add these additional security dependencies
     implementation 'org.springframework.security:spring-security-config'
     implementation 'org.springframework.security:spring-security-web'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+checkstyle {
+    toolVersion = '9.3'
+    ignoreFailures = true
+}
+
+pmd {
+    toolVersion = '6.44.0'
+    consoleOutput = true
+    ignoreFailures = true
+    ruleSets = [
+            'category/java/bestpractices.xml',
+            'category/java/errorprone.xml'
+    ]
+}
+
+spotbugs {
+    toolVersion = '4.7.3'
+    ignoreFailures = true
+}
+
+spotbugsMain {
+    reports {
+        html.required = true
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.9"
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
 tasks.named('test') {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }

@@ -1,6 +1,7 @@
 image: eclipse-temurin:17-jdk-jammy
 
 stages:
+  - validate
   - build
   - test
   - package
@@ -18,6 +19,22 @@ before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
   - chmod +x ./gradlew
 
+# New validation stage for code quality
+code_quality:
+  stage: validate
+  script:
+    - ./gradlew checkstyleMain
+    - ./gradlew pmdMain
+    - ./gradlew spotbugsMain
+  artifacts:
+    paths:
+      - build/reports/checkstyle/
+      - build/reports/pmd/
+      - build/reports/spotbugs/
+    when: always
+    expire_in: 1 week
+  allow_failure: true  # Set to false when you want to enforce
+
 build:
   stage: build
   script:
@@ -30,16 +47,15 @@ build:
 test:
   stage: test
   script:
-    - ./gradlew test
+    - ./gradlew test jacocoTestReport
   artifacts:
+    paths:
+      - build/reports/tests/
+      - build/reports/jacoco/
     reports:
       junit: build/test-results/test/**/TEST-*.xml
-
-code_quality:
-  stage: test
-  script:
-    - ./gradlew checkstyleMain
-  allow_failure: true
+    when: always
+    expire_in: 1 week
 
 package:
   stage: package
@@ -74,5 +90,3 @@ build-docker:
     - main
     - develop
     - tags
-
-# Deployment stages removed as requested

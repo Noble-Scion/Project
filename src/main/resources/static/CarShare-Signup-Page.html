@@ -210,11 +210,13 @@
                     });
 
                     if (response.ok) {
-                        window.location.href = "CarShare-Main-Page.html";
-                    } else {
-                        const error = await response.text();
-                        emailError.style.display = 'block';
-                        emailError.textContent = error;
+                        const data = await response.json();
+                        localStorage.setItem('userId', data.userId);
+                        if (data.needsDetails) {
+                            window.location.href = "CarShare-User-Details.html";
+                        } else {
+                            window.location.href = "CarShare-Main-Page.html";
+                        }
                     }
                 } catch (error) {
                     console.error('Error:', error);

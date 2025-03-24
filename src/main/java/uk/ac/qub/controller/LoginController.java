@@ -31,26 +31,26 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         Optional<User> userOpt = userRepository.findByEmail(request.getEmail());
-        
+
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             if (passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
                 user.setLastLogin(LocalDateTime.now());
                 userRepository.save(user);
-                
+
                 LoginResponse response = new LoginResponse();
                 response.setUserId(user.getUserId());
                 return ResponseEntity.ok(response);
             }
         }
-        
+
         return ResponseEntity.badRequest().body("Invalid email or password");
     }
 
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest request) {
         Optional<User> userOpt = userRepository.findByEmail(request.getEmail());
-        
+
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             String resetToken = UUID.randomUUID().toString();
@@ -60,14 +60,14 @@ public class LoginController {
 
             String resetLink = "http://localhost:8080/reset-password?token=" + resetToken;
             String emailBody = String.format(
-                "Hello,\n\nYou have requested to reset your password. Please click the link below to reset it:\n\n%s\n\n" +
-                "This link will expire in 24 hours.\n\nIf you didn't request this, please ignore this email.\n\n" +
-                "Best regards,\nCarShare Team", resetLink);
+                    "Hello,\n\nYou have requested to reset your password. Please click the link below to reset it:\n\n%s\n\n" +
+                            "This link will expire in 24 hours.\n\nIf you didn't request this, please ignore this email.\n\n" +
+                            "Best regards,\nCarShare Team", resetLink);
 
             emailService.sendEmail(request.getEmail(), "Password Reset Request", emailBody);
             return ResponseEntity.ok().build();
         }
-        
+
         return ResponseEntity.ok().build();
     }
 }

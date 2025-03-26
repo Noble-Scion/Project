@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarShare - Profile Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/profile.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: black;
+            margin: 0;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            position: sticky;
+            top: 0;
+        }
+
+        .back-arrow {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            filter: invert(1);
+            margin-right: 20px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            flex-grow: 1;
+            text-align: center;
+            margin-right: 50px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .details-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+        }
+
+        .details-header {
+            background: #2C3E97;
+            color: white;
+            padding: 30px 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .details-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .details-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .details-content {
+            padding: 30px;
+        }
+
+        .details-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-value {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #495057;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #2C3E97;
+            box-shadow: 0 0 0 3px rgba(44, 62, 151, 0.1);
+            outline: none;
+        }
+
+        .form-input:disabled {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .form-select:disabled {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+        }
+
+        .edit-button {
+            background: none;
+            border: none;
+            color: #2C3E97;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .edit-button:hover {
+            background-color: rgba(44, 62, 151, 0.1);
+        }
+
+        .save-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2C3E97;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .save-button:hover {
+            background-color: #3d4db4;
+        }
+
+        /* Error notification */
+        .error-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        /* Success notification */
+        .success-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .loading-indicator {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: #3498db;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .details-card {
+                margin: 10px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .content {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<img class="background-image" src="images/CarShare-Opening-Image.jpeg" alt="Background Image">
+
+<header>
+    <img src="images/back-button.png" alt="Back" class="back-arrow" onclick="goBack()">
+    <h1>Profile Details</h1>
+</header>
+
+<div class="content">
+    <div class="details-card">
+        <div class="details-header">
+            <div class="details-title">Your Profile Details</div>
+            <div class="details-subtitle">Some details cannot be changed after initial setup</div>
+        </div>
+
+        <div class="details-content">
+            <div id="loading-indicator" class="loading-indicator">
+                <div class="spinner"></div>
+                <p>Loading profile details...</p>
+            </div>
+            <div id="details-content" style="display: none;">
+                <!-- User Details Section -->
+                <div class="details-section">
+                    <div class="section-title">User Information</div>
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <div class="form-value" id="username">Loading...</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <div class="form-value" id="fullName">Loading...</div>
+                    </div>
+                </div>
+
+                <!-- Car Details Section -->
+                <div class="details-section">
+                    <div class="section-title">
+                        Car Details
+                        <button type="button" class="edit-button" onclick="toggleCarEdit()">Edit</button>
+                    </div>
+                    <form id="carDetailsForm">
+                        <div class="form-group">
+                            <label for="registrationNumber" class="form-label">Registration Number</label>
+                            <input type="text" id="registrationNumber" class="form-input" disabled required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="carMake" class="form-label">Make</label>
+                            <input type="text" id="carMake" class="form-input" disabled required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="carModel" class="form-label">Model</label>
+                            <input type="text" id="carModel" class="form-input" disabled required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="carYear" class="form-label">Year</label>
+                            <input type="number" id="carYear" class="form-input" min="1900" disabled required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fuelType" class="form-label">Fuel Type</label>
+                            <select id="fuelType" class="form-select" disabled required>
+                                <option value="PETROL">Petrol</option>
+                                <option value="DIESEL">Diesel</option>
+                                <option value="HYBRID">Hybrid</option>
+                                <option value="ELECTRIC">Electric</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="avgMpg" class="form-label">Average MPG</label>
+                            <input type="number" id="avgMpg" class="form-input" min="1" max="200" step="0.1" disabled required>
+                        </div>
+
+                        <button type="submit" class="save-button" style="display: none;">Save Changes</button>
+                    </form>
+                </div>
+
+                <button onclick="goBack()" class="save-button">Back to Profile</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function checkAuth() {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            window.location.href = 'CarShare-Login.html';
+            return false;
+        }
+        return userId;
+    }
+
+    async function loadUserDetails() {
+        const userId = checkAuth();
+        if (!userId) return;
+
+        console.log("Loading user details for user ID:", userId);
+
+        // Use the username from localStorage if available
+        const cachedUsername = localStorage.getItem('username');
+        if (cachedUsername) {
+            document.getElementById('username').textContent = cachedUsername;
+            document.getElementById('fullName').textContent = cachedUsername;
+        }
+
+        // Show loading indicator
+        document.getElementById('loading-indicator').style.display = 'block';
+        document.getElementById('details-content').style.display = 'none';
+
+        try {
+            // Get cached car data from local storage if available
+            const cachedCarData = localStorage.getItem('carDetails');
+            let carData = null;
+
+            if (cachedCarData) {
+                try {
+                    carData = JSON.parse(cachedCarData);
+                    console.log("Using cached car data:", carData);
+                } catch (e) {
+                    console.error("Error parsing cached car data:", e);
+                }
+            }
+
+            // Try to fetch user data from API
+            let userData = null;
+            let fetchSuccess = false;
+
+            // Attempt to fetch from profile endpoint
+            try {
+                const profileResponse = await fetch(`/api/profile/${userId}`);
+                if (profileResponse.ok) {
+                    userData = await profileResponse.json();
+                    fetchSuccess = true;
+                    console.log("User data retrieved from profile endpoint:", userData);
+
+                    // Store car data in local storage for future use
+                    if (userData.car) {
+                        localStorage.setItem('carDetails', JSON.stringify(userData.car));
+                    }
+                }
+            } catch (e) {
+                console.warn("Error fetching from profile endpoint:", e);
+            }
+
+            // If profile fetch failed, try user details endpoint
+            if (!fetchSuccess) {
+                try {
+                    const userResponse = await fetch(`/api/user/${userId}`);
+                    if (userResponse.ok) {
+                        userData = await userResponse.json();
+                        fetchSuccess = true;
+                        console.log("User data retrieved from user endpoint:", userData);
+
+                        // Store car data in local storage for future use
+                        if (userData.car) {
+                            localStorage.setItem('carDetails', JSON.stringify(userData.car));
+                        }
+                    }
+                } catch (e) {
+                    console.warn("Error fetching from user endpoint:", e);
+                }
+            }
+
+            // Hide loading indicator
+            document.getElementById('loading-indicator').style.display = 'none';
+            document.getElementById('details-content').style.display = 'block';
+
+            // Update UI with either fetched data or cached data
+            const username = userData ? extractUsername(userData) : cachedUsername || 'User';
+            document.getElementById('username').textContent = username;
+            document.getElementById('fullName').textContent = username;
+
+            // Save username to localStorage for persistence
+            localStorage.setItem('username', username);
+
+            // Use fetched car data or fallback to cached data
+            const carDetails = userData && userData.car ? userData.car : carData;
+
+            if (carDetails) {
+                updateCarDetailsUI(carDetails);
+            } else {
+                // Set empty values if no car data available
+                document.getElementById('registrationNumber').value = '';
+                document.getElementById('carMake').value = '';
+                document.getElementById('carModel').value = '';
+                document.getElementById('carYear').value = '';
+                document.getElementById('fuelType').value = 'PETROL';
+                document.getElementById('avgMpg').value = '';
+
+                // Show a message to the user
+                showMessage('Car details not available. You can add them by clicking Edit.');
+            }
+        } catch (error) {
+            console.error("Error loading user details:", error);
+
+            // Hide loading indicator, show content
+            document.getElementById('loading-indicator').style.display = 'none';
+            document.getElementById('details-content').style.display = 'block';
+
+            // Use cached data as fallback
+            document.getElementById('username').textContent = cachedUsername || 'User';
+            document.getElementById('fullName').textContent = cachedUsername || 'User';
+
+            // Try to use cached car data
+            if (cachedCarData) {
+                try {
+                    const carDetails = JSON.parse(cachedCarData);
+                    updateCarDetailsUI(carDetails);
+                } catch (e) {
+                    console.error("Error parsing cached car data:", e);
+                    // Set empty values
+                    document.getElementById('registrationNumber').value = '';
+                    document.getElementById('carMake').value = '';
+                    document.getElementById('carModel').value = '';
+                    document.getElementById('carYear').value = '';
+                    document.getElementById('fuelType').value = 'PETROL';
+                    document.getElementById('avgMpg').value = '';
+                }
+            }
+
+            showError('Could not load profile details. Using cached data.');
+        }
+    }
+
+    function updateCarDetailsUI(carData) {
+        if (!carData) return;
+
+        document.getElementById('registrationNumber').value = carData.registrationNumber || '';
+        document.getElementById('carMake').value = carData.make || '';
+        document.getElementById('carModel').value = carData.model || '';
+        document.getElementById('carYear').value = carData.year || '';
+        document.getElementById('fuelType').value = carData.fuelType || 'PETROL';
+        document.getElementById('avgMpg').value = carData.avgMpg || '';
+    }
+
+    function extractUsername(userData) {
+        // Check all possible locations for username
+        if (userData.username) return userData.username;
+        if (userData.userName) return userData.userName;
+        if (userData.name) return userData.name;
+
+        // Check nested properties
+        if (userData.user && userData.user.username) return userData.user.username;
+        if (userData.userDetails && userData.userDetails.username) return userData.userDetails.username;
+
+        // Check for email as fallback
+        if (userData.email) {
+            const emailParts = userData.email.split('@');
+            if (emailParts.length > 0) return emailParts[0];
+        }
+
+        // Use cached username if available
+        const cachedUsername = localStorage.getItem('username');
+        if (cachedUsername) return cachedUsername;
+
+        // Last resort
+        return "User";
+    }
+
+    function toggleCarEdit() {
+        const form = document.getElementById('carDetailsForm');
+        const inputs = form.querySelectorAll('input, select');
+        const submitButton = form.querySelector('.save-button');
+        const editButton = document.querySelector('.edit-button');
+
+        const isDisabled = inputs[0].disabled;
+
+        inputs.forEach(input => {
+            input.disabled = !isDisabled;
+        });
+
+        if (isDisabled) {
+            submitButton.style.display = 'block';
+            editButton.textContent = 'Cancel';
+        } else {
+            submitButton.style.display = 'none';
+            editButton.textContent = 'Edit';
+
+            // Reload form data from memory
+            const cachedCarData = localStorage.getItem('carDetails');
+            if (cachedCarData) {
+                try {
+                    const carData = JSON.parse(cachedCarData);
+                    updateCarDetailsUI(carData);
+                } catch (e) {
+                    console.error("Error parsing cached car data:", e);
+                }
+            }
+        }
+    }
+
+    document.getElementById('carDetailsForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const userId = checkAuth();
+        if (!userId) return;
+
+        // Get values from form
+        const carData = {
+            registrationNumber: document.getElementById('registrationNumber').value,
+            make: document.getElementById('carMake').value,
+            model: document.getElementById('carModel').value,
+            year: parseInt(document.getElementById('carYear').value) || 2023,
+            fuelType: document.getElementById('fuelType').value,
+            avgMpg: parseFloat(document.getElementById('avgMpg').value) || 30.0
+        };
+
+        console.log("Updating car details:", carData);
+
+        try {
+            let success = false;
+            let errorMessage = '';
+
+            // Try main endpoint
+            try {
+                const response = await fetch(`/api/details/${userId}/car`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(carData)
+                });
+
+                if (response.ok) {
+                    success = true;
+                } else {
+                    errorMessage = await response.text();
+                }
+            } catch (error) {
+                console.warn("Error with main endpoint:", error);
+                errorMessage = error.message;
+            }
+
+            if (success) {
+                // Update local storage with new car data
+                localStorage.setItem('carDetails', JSON.stringify(carData));
+
+                showMessage('Car details updated successfully');
+                toggleCarEdit(); // Reset form to view mode
+            } else {
+                // If API call fails, still update local storage
+                localStorage.setItem('carDetails', JSON.stringify(carData));
+
+                // Show success message anyway since we saved locally
+                showMessage('Car details saved locally');
+                toggleCarEdit(); // Reset form to view mode
+
+                // Log error for debugging
+                console.warn("Note: API call failed but data saved locally. Error:", errorMessage);
+            }
+        } catch (error) {
+            console.error('Error updating car details:', error);
+
+            // Still save to local storage as fallback
+            localStorage.setItem('carDetails', JSON.stringify(carData));
+            showMessage('Car details saved locally (API unavailable)');
+            toggleCarEdit(); // Reset form to view mode
+        }
+    });
+
+    function showError(message) {
+        const toast = document.createElement('div');
+        toast.className = 'error-toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+
+    function showMessage(message) {
+        const toast = document.createElement('div');
+        toast.className = 'success-toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+
+    function goBack() {
+        window.location.href = 'CarShare-Profile-Page.html';
+    }
+
+    // Set max year to current year
+    document.getElementById('carYear').max = new Date().getFullYear();
+
+    // Load profile when page loads
+    document.addEventListener('DOMContentLoaded', loadUserDetails);
+</script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarShare - Complete Your Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/car.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: black;
+            margin: 0;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .content {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .details-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .details-header {
+            background: #2C3E97;
+            color: white;
+            padding: 30px 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .details-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .details-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .details-form {
+            padding: 30px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #2C3E97;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            border-color: #2C3E97;
+            box-shadow: 0 0 0 3px rgba(44, 62, 151, 0.1);
+            outline: none;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-hint {
+            color: #666;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 14px;
+            background: #2C3E97;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-button:hover {
+            background: #3d4db4;
+        }
+
+        .submit-button:disabled {
+            background: #B3B3B3;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 10px;
+                margin: 20px auto;
+            }
+
+            .details-title {
+                font-size: 24px;
+            }
+
+            .form-input,
+            .form-select {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+<img class="background-image" src="images/CarShare-Opening-Image.jpeg" alt="Background Image">
+
+<div class="content">
+    <div class="details-card">
+        <div class="details-header">
+            <div class="details-title">Complete Your Profile</div>
+            <div class="details-subtitle">Add your details to start sharing journeys</div>
+        </div>
+
+        <form class="details-form" id="detailsForm">
+            <!-- User Details Section -->
+            <div class="form-section">
+                <div class="section-title">User Information</div>
+
+                <div class="form-group">
+                    <label for="username" class="form-label">Choose a Username</label>
+                    <input type="text" id="username" class="form-input" required>
+                    <div id="usernameError" class="error-message">Username is already taken</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" id="fullName" class="form-input" required>
+                    <div id="fullNameError" class="error-message">Please enter your full name</div>
+                </div>
+            </div>
+
+            <!-- Car Details Section -->
+            <div class="form-section">
+                <div class="section-title">Car Details</div>
+
+                <div class="form-group">
+                    <label for="registrationNumber" class="form-label">Registration Number</label>
+                    <input type="text" id="registrationNumber" class="form-input" placeholder="e.g., AB12 CDE" required>
+                    <div class="form-hint">Enter your car's registration number</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="carMake" class="form-label">Car Make</label>
+                    <input type="text" id="carMake" class="form-input" placeholder="e.g., Toyota" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="carModel" class="form-label">Car Model</label>
+                    <input type="text" id="carModel" class="form-input" placeholder="e.g., Corolla" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="carYear" class="form-label">Car Year</label>
+                    <input type="number" id="carYear" class="form-input" min="1900" required>
+                    <div class="form-hint">Year your car was manufactured</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fuelType" class="form-label">Fuel Type</label>
+                    <select id="fuelType" class="form-select" required>
+                        <option value="">Select fuel type</option>
+                        <option value="PETROL">Petrol</option>
+                        <option value="DIESEL">Diesel</option>
+                        <option value="HYBRID">Hybrid</option>
+                        <option value="ELECTRIC">Electric</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="avgMpg" class="form-label">Average MPG</label>
+                    <input type="number" id="avgMpg" class="form-input" min="1" max="200" step="0.1" required>
+                    <div class="form-hint">Enter your car's average miles per gallon</div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button">Complete Profile</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('detailsForm');
+    const usernameInput = document.getElementById('username');
+    const fullNameInput = document.getElementById('fullName');
+    const usernameError = document.getElementById('usernameError');
+    const fullNameError = document.getElementById('fullNameError');
+
+    // Set max year to current year
+    document.getElementById('carYear').max = new Date().getFullYear();
+
+    function checkAuth() {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            window.location.href = 'CarShare-Login.html';
+        }
+        return userId;
+    }
+
+    async function checkUsername(username) {
+        try {
+            const response = await fetch(`/api/check-username/${username}`);
+            return response.ok;
+        } catch (error) {
+            console.error('Error checking username:', error);
+            return false;
+        }
+    }
+
+    let usernameTimeout;
+    usernameInput.addEventListener('input', () => {
+        clearTimeout(usernameTimeout);
+        usernameTimeout = setTimeout(async () => {
+            const isAvailable = await checkUsername(usernameInput.value);
+            usernameError.style.display = isAvailable ? 'none' : 'block';
+        }, 500);
+    });
+
+    fullNameInput.addEventListener('input', () => {
+        fullNameError.style.display = fullNameInput.value ? 'none' : 'block';
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const userId = checkAuth();
+        if (!userId) return;
+
+        const formData = {
+            userId: parseInt(userId),
+            username: usernameInput.value,
+            fullName: fullNameInput.value,
+            car: {
+                registrationNumber: document.getElementById('registrationNumber').value,
+                make: document.getElementById('carMake').value,
+                model: document.getElementById('carModel').value,
+                year: parseInt(document.getElementById('carYear').value),
+                fuelType: document.getElementById('fuelType').value,
+                avgMpg: parseFloat(document.getElementById('avgMpg').value)
+            }
+        };
+
+        try {
+            const response = await fetch('/api/complete-profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                window.location.href = 'CarShare-Main-Page.html';
+            } else {
+                const error = await response.text();
+                alert(error || 'An error occurred while saving profile');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while saving profile');
+        }
+    });
+
+    // Check authentication on page load
+    document.addEventListener('DOMContentLoaded', checkAuth);
+</script>
+</body>
+</html>

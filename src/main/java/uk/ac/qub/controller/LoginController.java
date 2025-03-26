@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import uk.ac.qub.dto.LoginRequest;
+import uk.ac.qub.dto.LoginResponse;
 import uk.ac.qub.model.User;
 import uk.ac.qub.service.EmailService;
 import uk.ac.qub.repository.UserRepository;
-import uk.ac.qub.dto.LoginRequest;
-import uk.ac.qub.dto.LoginResponse;
 import uk.ac.qub.dto.ForgotPasswordRequest;
 
 import java.time.LocalDateTime;

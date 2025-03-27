@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarShare - Join a Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/search.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            color: #333;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 0 0 12px 12px;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+
+        .back-arrow {
+            position: absolute;
+            left: 15px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+        }
+
+        .journeys-container {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .journey-box {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .journey-box:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.02);
+        }
+
+        .journey-details {
+            flex-grow: 1;
+        }
+
+        .journey-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .journey-map {
+            width: 100px;
+            height: 100px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .passengers-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .passenger-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            border-radius: 20px;
+        }
+
+        .passenger-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .passenger-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .passenger-name {
+            font-size: 12px;
+            color: #333;
+        }
+
+        nav {
+            background-color: #3498db;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-button {
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 28px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-button {
+                width: 100%;
+            }
+
+            .journey-box {
+                flex-direction: column;
+            }
+
+            .journey-right {
+                width: 100%;
+                align-items: center;
+                margin-top: 10px;
+            }
+
+            .passengers-list {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Add status indicator style */
+        .journey-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status-active {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .status-pending {
+            background-color: #f1c40f;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img src="images/back-button.png" alt="Back" class="back-arrow" onclick="goBack()">
+    <h1>Join a Journey</h1>
+</header>
+
+<div class="journeys-container">
+    <!-- Journeys will be dynamically loaded here -->
+</div>
+
+<nav>
+    <button class="nav-button" onclick="window.location.href='CarShare-Main-Page.html'">Create a Journey</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Join-a-Journey-Page.html'">Journeys</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Profile-Page.html'">My Profile</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Friends-Page.html'">Friends</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Notification-Page.html'">Notifications</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Settings-Page.html'">Settings</button>
+</nav>
+
+<script>
+    function checkAuth() {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            window.location.href = 'CarShare-Login.html';
+        }
+        return userId;
+    }
+
+    async function loadFriendJourneys() {
+        const userId = checkAuth();
+        try {
+            const response = await fetch(`/api/journeys/friends/${userId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch journeys');
+            }
+            const journeys = await response.json();
+            displayJourneys(journeys);
+        } catch (error) {
+            console.error('Error loading journeys:', error);
+            document.querySelector('.journeys-container').innerHTML =
+                '<p class="error-message">Error loading journeys. Please try again later.</p>';
+        }
+    }
+
+    function displayJourneys(journeys) {
+        const container = document.querySelector('.journeys-container');
+        if (!journeys || journeys.length === 0) {
+            container.innerHTML = '<p class="no-journeys">No journeys available from your friends at the moment.</p>';
+            return;
+        }
+
+        container.innerHTML = journeys.map(journey => {
+            const passengersList = journey.passengers ? journey.passengers
+                .filter(p => p.status === 'ACCEPTED')
+                .map(passenger => `
+                    <div class="passenger-item">
+                        <div class="passenger-avatar">
+                            <img src="${passenger.profilePictureUrl || '/api/placeholder/30/30'}"
+                                 alt="${passenger.username}">
+                        </div>
+                        <span class="passenger-name">${passenger.username}</span>
+                    </div>
+                `).join('') : '';
+
+            // Add status indicator
+            const statusClass = journey.status === 'ACTIVE' ? 'status-active' : 'status-pending';
+            const statusDisplay = `<span class="journey-status ${statusClass}">${formatStatus(journey.status)}</span>`;
+
+            return `
+                <div class="journey-box" onclick="viewJourneyDetails(${JSON.stringify(journey).replace(/"/g, '&quot;')})">
+                    <div class="journey-details">
+                        <h3>${journey.driver?.userDetails?.username || 'Unknown Driver'}'s Journey ${statusDisplay}</h3>
+                        <p>From: ${journey.startAddress}</p>
+                        <p>To: ${journey.endAddress}</p>
+                        <p>Date: ${new Date(journey.journeyDateTime).toLocaleDateString()}</p>
+                        <p>Time: ${new Date(journey.journeyDateTime).toLocaleTimeString()}</p>
+                        <p>Seats Available: ${journey.availableSeats}</p>
+                    </div>
+                    <div class="journey-right">
+                        <img src="/api/placeholder/100/100" alt="Journey Map" class="journey-map">
+                        <div class="passengers-list">
+                            ${passengersList}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function formatStatus(status) {
+        return status.split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(' ');
+    }
+
+    function viewJourneyDetails(journeyData) {
+        const userId = checkAuth();
+        const isDriver = journeyData.driver.userId === parseInt(userId);
+
+        // Store journey details
+        localStorage.setItem('journeyDetails', JSON.stringify({
+            driverName: journeyData.driver.userDetails.username,
+            from: journeyData.startAddress,
+            to: journeyData.endAddress,
+            date: journeyData.journeyDateTime,
+            seats: journeyData.availableSeats,
+            journeyId: journeyData.journeyId,
+            origin: { lat: journeyData.startLat, lng: journeyData.startLng },
+            destination: { lat: journeyData.endLat, lng: journeyData.endLng }
+        }));
+
+        // Redirect to appropriate view
+        if (isDriver) {
+            window.location.href = `CarShare-Live-Journey.html?journeyId=${journeyData.journeyId}`;
+        } else {
+            window.location.href = `CarShare-Journey-Details.html?journeyId=${journeyData.journeyId}`;
+        }
+    }
+
+    function goBack() {
+        window.history.back();
+    }
+
+    document.addEventListener('DOMContentLoaded', loadFriendJourneys);
+</script>
+</body>
+</html>

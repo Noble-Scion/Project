@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/car.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #ecf0f1;
+            overflow: hidden;
+        }
+
+        #map {
+            flex-grow: 1;
+            width: 100%;
+            height: 100vh;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #journey-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            max-height: 80vh;
+            overflow-y: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .journey-details h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            color: #34495e;
+            margin-bottom: 10px;
+        }
+
+        .journey-details p {
+            margin: 5px 0;
+            color: #7f8c8d;
+        }
+
+        .journey-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .journey-btn {
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .journey-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .journey-btn:focus {
+            outline: none;
+        }
+
+        .error-message {
+            color: #dc3545;
+            text-align: center;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .pickup-mode {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            text-align: center;
+            display: none;
+        }
+
+        .pickup-mode.active {
+            display: block;
+        }
+
+        .pickup-confirmation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+            max-width: 400px;
+            width: 90%;
+            display: none;
+        }
+
+        .pickup-confirmation.active {
+            display: block;
+        }
+
+        .confirmation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .marker-info {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 2;
+        }
+
+        .marker-info.active {
+            display: block;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .passengers-list {
+            margin-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 15px;
+        }
+
+        .passenger-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .passenger-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .passenger-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .passenger-info {
+            flex-grow: 1;
+        }
+
+        .passenger-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .passenger-pickup {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            #journey-info {
+                width: 80%;
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .journey-details h2 {
+                font-size: 18px;
+            }
+
+            .journey-btn {
+                width: 48%;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="pickup-mode" id="pickupMode">
+    <p>Click on the map to set your pickup location</p>
+</div>
+
+<div class="marker-info" id="markerInfo">
+    <p>Drag marker to adjust pickup location</p>
+</div>
+
+<div class="pickup-confirmation" id="pickupConfirmation">
+    <h3>Confirm Pickup Location</h3>
+    <p id="pickupAddress">Loading address...</p>
+    <p id="additionalDistance">Calculating additional distance...</p>
+    <p id="newDuration">Calculating new duration...</p>
+    <div class="confirmation-buttons">
+        <button class="btn-secondary" onclick="cancelPickupSelection()">Cancel</button>
+        <button class="btn-primary" onclick="confirmPickupLocation()">Confirm Location</button>
+    </div>
+</div>
+
+<div id="journey-info">
+    <div class="journey-details">
+        <h2>Journey Details</h2>
+        <p id="driver-name"></p>
+        <p id="journey-route"></p>
+        <p id="journey-date"></p>
+        <p id="journey-time"></p>
+        <p id="journey-seats"></p>
+        <p id="journey-distance">Distance: Calculating...</p>
+        <p id="journey-duration">Duration: Calculating...</p>
+        <div class="passengers-list">
+            <h3>Passengers</h3>
+            <div id="passengers-container"></div>
+        </div>
+    </div>
+    <div class="journey-actions">
+        <button class="journey-btn" onclick="goBackToJourneys()">Back</button>
+        <button class="journey-btn" onclick="startPickupSelection()">Accept Journey</button>
+    </div>
+</div>
+
+<script>
+    let map;
+    let directionsService;
+    let directionsRenderer;
+    let originalRoute;
+    let pickupMarker;
+    let geocoder;
+
+    function checkAuth() {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            window.location.href = 'CarShare-Login.html';
+        }
+        return userId;
+    }
+
+    function initMap() {
+        const journeyDetails = JSON.parse(localStorage.getItem('journeyDetails'));
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: journeyDetails.origin,
+            zoom: 12
+        });
+
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+        geocoder = new google.maps.Geocoder();
+
+        calculateAndDisplayRoute(journeyDetails.origin, journeyDetails.destination);
+
+        map.addListener('click', function(e) {
+            if (document.getElementById('pickupMode').classList.contains('active')) {
+                placePickupMarker(e.latLng);
+            }
+        });
+    }
+
+    function startPickupSelection() {
+        document.getElementById('pickupMode').classList.add('active');
+        document.getElementById('journey-info').style.display = 'none';
+    }
+
+    function placePickupMarker(location) {
+        if (pickupMarker) {
+            pickupMarker.setMap(null);
+        }
+
+        pickupMarker = new google.maps.Marker({
+            position: location,
+            map: map,
+            draggable: true,
+            title: 'Your pickup location'
+        });
+
+        document.getElementById('markerInfo').classList.add('active');
+        document.getElementById('pickupMode').classList.remove('active');
+
+        pickupMarker.addListener('dragend', function() {
+            calculatePickupRoute();
+        });
+
+        calculatePickupRoute();
+    }
+
+    function calculatePickupRoute() {
+        const journeyDetails = JSON.parse(localStorage.getItem('journeyDetails'));
+        const waypts = [{
+            location: pickupMarker.getPosition(),
+            stopover: true
+        }];
+
+        directionsService.route({
+            origin: journeyDetails.origin,
+            destination: journeyDetails.destination,
+            waypoints: waypts,
+            travelMode: 'DRIVING',
+            optimizeWaypoints: true
+        }, function(result, status) {
+            if (status === 'OK') {
+                directionsRenderer.setDirections(result);
+
+                geocoder.geocode({ location: pickupMarker.getPosition() }, function(results, status) {
+                    if (status === 'OK') {
+                        document.getElementById('pickupAddress').textContent =
+                            'Pickup location: ' + results[0].formatted_address;
+                    }
+                });
+
+                const originalDistance = originalRoute.routes[0].legs[0].distance.value;
+                const newDistance = result.routes[0].legs.reduce((total, leg) => total + leg.distance.value, 0);
+                const additionalDistance = (newDistance - originalDistance) / 1000;
+
+                const originalDuration = originalRoute.routes[0].legs[0].duration.value;
+                const newDuration = result.routes[0].legs.reduce((total, leg) => total + leg.duration.value, 0);
+                const additionalTime = Math.round((newDuration - originalDuration) / 60);
+
+                document.getElementById('additionalDistance').textContent =
+                    `Additional distance: ${additionalDistance.toFixed(1)} km`;
+                document.getElementById('newDuration').textContent =
+                    `Additional time: ${additionalTime} minutes`;
+
+                document.getElementById('pickupConfirmation').classList.add('active');
+            }
+        });
+    }
+
+    function cancelPickupSelection() {
+        if (pickupMarker) {
+            pickupMarker.setMap(null);
+        }
+        document.getElementById('pickupConfirmation').classList.remove('active');
+        document.getElementById('markerInfo').classList.remove('active');
+        document.getElementById('journey-info').style.display = 'block';
+
+        directionsRenderer.setDirections(originalRoute);
+    }
+
+    async function confirmPickupLocation() {
+        const userId = checkAuth();
+        const journeyDetails = JSON.parse(localStorage.getItem('journeyDetails'));
+
+        try {
+            const pickup = pickupMarker.getPosition();
+            const response = await fetch('/api/journeys/request-pickup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    journeyId: journeyDetails.journeyId,
+                    userId: parseInt(userId),
+                    pickupLat: pickup.lat(),
+                    pickupLng: pickup.lng(),
+                    pickupAddress: document.getElementById('pickupAddress').textContent
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to submit pickup request');
+            }
+
+            alert('Pickup request submitted! Awaiting driver approval.');
+            window.location.href = 'CarShare-Main-Page.html';
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error submitting pickup request. Please try again.');
+        }
+    }
+
+    function calculateAndDisplayRoute(origin, destination) {
+        directionsService.route(
+            {
+                origin: origin,
+                destination: destination,
+                travelMode: 'DRIVING'
+            },
+            (response, status) => {
+                if (status === 'OK') {
+                    originalRoute = response;
+                    directionsRenderer.setDirections(response);
+                    const route = response.routes[0].legs[0];
+                    document.getElementById('journey-distance').textContent =
+                        `Distance: ${route.distance.text}`;
+                    document.getElementById('journey-duration').textContent =
+                        `Duration: ${route.duration.text}`;
+                } else {
+                    console.error('Directions request failed due to ' + status);
+                }
+            }
+        );
+    }
+
+    async function loadJourneyDetails() {
+        const journeyDetailsStr = localStorage.getItem('journeyDetails');
+        if (!journeyDetailsStr) {
+            window.location.href = 'CarShare-Join-a-Journey-Page.html';
+            return;
+        }
+
+        const journey = JSON.parse(journeyDetailsStr);
+
+        document.getElementById('driver-name').textContent = journey.driverName;
+        document.getElementById('journey-route').textContent = `${journey.from} to ${journey.to}`;
+        document.getElementById('journey-date').textContent = `Date: ${new Date(journey.date).toLocaleDateString()}`;
+        document.getElementById('journey-time').textContent = `Time: ${new Date(journey.date).toLocaleTimeString()}`;
+        document.getElementById('journey-seats').textContent = `Seats Available: ${journey.seats}`;
+
+        await loadPassengers();
+        initMap();
+    }
+
+    async function loadPassengers() {
+        const journeyDetails = JSON.parse(localStorage.getItem('journeyDetails'));
+        const response = await fetch(`/api/journeys/${journeyDetails.journeyId}`);
+        if (response.ok) {
+            const journey = await response.json();
+            const passengersContainer = document.getElementById('passengers-container');
+
+            if (!journey.passengers || journey.passengers.length === 0) {
+                passengersContainer.innerHTML = '<p>No passengers yet</p>';
+                return;
+            }
+
+            passengersContainer.innerHTML = journey.passengers
+                .filter(p => p.status === 'ACCEPTED')
+                .map(passenger => `
+                    <div class="passenger-item">
+                        <div class="passenger-avatar">
+                            <img src="${passenger.profilePictureUrl || '/api/placeholder/40/40'}"
+                                 alt="${passenger.username}">
+                        </div>
+                        <div class="passenger-info">
+                            <div class="passenger-name">${passenger.username}</div>
+                            <div class="passenger-pickup">Pickup: ${passenger.pickupAddress}</div>
+                        </div>
+                    </div>
+                `).join('');
+        }
+    }
+
+    function goBackToJourneys() {
+        window.location.href = 'CarShare-Join-a-Journey-Page.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', loadJourneyDetails);
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbzDS0oDf93XMg2E_gw0dp2I2SNqmgfQs&callback=initMap" async defer></script>
+</body>
+</html>

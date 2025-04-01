@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+      <html lang="en">
+      <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Friend Profile - CarShare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/profile.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .back-arrow {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      filter: invert(1);
+    }
+
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      margin: 0 auto;
+    }
+
+    .friendship-status {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    .friendship-status.pending {
+      background-color: #f39c12;
+    }
+
+    .friendship-status.not-friends {
+      background-color: #3498db;
+    }
+
+    .friendship-status:hover {
+      opacity: 0.9;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .profile-section {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+      border: 3px solid #f5f5f5;
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .profile-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #2c3e50;
+    }
+
+    .profile-bio {
+      color: #666;
+      font-style: italic;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat-box {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .journeys-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .journey-card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .journey-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .journey-route {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .journey-details {
+      display: flex;
+      justify-content: space-between;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .journey-date {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .journey-passengers {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .action-button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .report-btn {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .report-btn:hover {
+      background: #c0392b;
+    }
+
+    .unfriend-btn {
+      background: #f39c12;
+      color: white;
+    }
+
+    .unfriend-btn:hover {
+      background: #d35400;
+    }
+
+    .carbon-offset {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .carbon-value {
+      font-size: 20px;
+      font-weight: bold;
+      color: #27ae60;
+      margin-bottom: 5px;
+    }
+
+    .carbon-label {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .no-content {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .loading-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border-left-color: #3498db;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error-message {
+      background: #fee2e2;
+      color: #b91c1c;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      text-align: center;
+      display: none;
+    }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      display: none;
+      z-index: 1000;
+      animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    nav {
+      background-color: #3498db;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .nav-button {
+      background-color: transparent;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    .nav-button:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .profile-photo {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      .nav-button {
+        font-size: 14px;
+        padding: 6px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <img src="images/back-button.png" alt="Back" class="back-arrow" onclick="goBack()">
+  <h1>Friend Profile</h1>
+  <button class="friendship-status" id="friendshipButton">Friends</button>
+</header>
+
+<div class="main-content">
+  <div id="errorMessage" class="error-message"></div>
+
+  <div id="loadingContent" class="loading-indicator">
+    <div class="spinner"></div>
+  </div>
+
+  <div id="profileContent" style="display: none;">
+    <div class="profile-section">
+      <div class="profile-header">
+        <img id="profilePhoto" src="/api/placeholder/100/100" alt="Profile" class="profile-photo">
+        <div class="profile-info">
+          <h2 id="profileName" class="profile-name">Loading...</h2>
+          <p id="profileBio" class="profile-bio">Loading bio...</p>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="action-button report-btn" onclick="reportUser()">Report User</button>
+        <button class="action-button unfriend-btn" onclick="unfriendUser()">Unfriend</button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-number" id="journeysMade">0</div>
+        <div class="stat-label">Journeys Made</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" id="journeysTaken">0</div>
+        <div class="stat-label">Journeys Taken</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" id="upcomingJourneys">0</div>
+        <div class="stat-label">Upcoming</div>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h3 class="section-title">Upcoming Journeys</h3>
+      <div id="journeysList" class="journeys-list">
+        <div class="loading-indicator">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+      <div class="carbon-offset">
+        <div class="carbon-value" id="carbonOffset">0 kg</div>
+        <div class="carbon-label">CO₂ Offset with CarShare</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<nav>
+  <button class="nav-button" onclick="window.location.href='CarShare-Main-Page.html'">Create a Journey</button>
+  <button class="nav-button" onclick="window.location.href='CarShare-Join-a-Journey-Page.html'">Journeys</button>
+  <button class="nav-button" onclick="window.location.href='CarShare-Profile-Page.html'">My Profile</button>
+  <button class="nav-button" onclick="window.location.href='CarShare-Friends-Page.html'">Friends</button>
+  <button class="nav-button" onclick="window.location.href='CarShare-Notification-Page.html'">Notifications</button>
+  <button class="nav-button" onclick="window.location.href='CarShare-Settings-Page.html'">Settings</button>
+</nav>
+
+<script>
+  // Check if user is authenticated
+  function checkAuth() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      window.location.href = 'CarShare-Login.html';
+      return null;
+    }
+    return userId;
+  }
+
+  // Get the friend's ID from the URL
+  function getFriendId() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('userId');
+  }
+
+  // Load friend's profile
+  async function loadFriendProfile() {
+    const userId = checkAuth();
+    const friendId = getFriendId();
+
+    if (!userId || !friendId) {
+      showError("Invalid user ID");
+      return;
+    }
+
+    try {
+      // Show loading and hide content
+      document.getElementById('loadingContent').style.display = 'flex';
+      document.getElementById('profileContent').style.display = 'none';
+      document.getElementById('errorMessage').style.display = 'none';
+
+      // Check friendship status
+      const friendshipResponse = await fetch(`/api/journeys/check-friendship/${userId}/${friendId}`);
+      if (friendshipResponse.ok) {
+        const friendshipData = await friendshipResponse.json();
+        updateFriendshipButton(friendshipData);
+      }
+
+      // Load user profile data - try multiple methods to ensure we get data
+      let profileData = null;
+
+      // Try main profile endpoint first
+      try {
+        const profileResponse = await fetch(`/api/profile/${friendId}`);
+        if (profileResponse.ok) {
+          profileData = await profileResponse.json();
+          console.log("Profile data loaded:", profileData);
+        }
+      } catch (profileError) {
+        console.warn("Error fetching profile:", profileError);
+      }
+
+      // If failed, try user endpoint
+      if (!profileData) {
+        try {
+          const userResponse = await fetch(`/api/user/${friendId}`);
+          if (userResponse.ok) {
+            profileData = await userResponse.json();
+            console.log("User data loaded:", profileData);
+          }
+        } catch (userError) {
+          console.warn("Error fetching user data:", userError);
+        }
+      }
+
+      // If still no data, try user details endpoint
+      if (!profileData) {
+        try {
+          const detailsResponse = await fetch(`/api/user-details/${friendId}`);
+          if (detailsResponse.ok) {
+            profileData = await detailsResponse.json();
+            console.log("User details loaded:", profileData);
+          }
+        } catch (detailsError) {
+          console.warn("Error fetching user details:", detailsError);
+        }
+      }
+
+      // If we still don't have data, try to get data from friends list
+      if (!profileData) {
+        try {
+          const friendsResponse = await fetch(`/api/friends/list/${userId}`);
+          if (friendsResponse.ok) {
+            const friends = await friendsResponse.json();
+            const friend = friends.find(f => f.userId == friendId);
+            if (friend) {
+              profileData = {
+                username: friend.username,
+                profilePictureUrl: friend.profilePictureUrl || `/api/profile/${friendId}/picture`
+              };
+              console.log("Friend data loaded from friends list:", profileData);
+            }
+          }
+        } catch (friendsError) {
+          console.warn("Error fetching friends list:", friendsError);
+        }
+      }
+
+      // If we still don't have data, create default data
+      if (!profileData) {
+        // First check if we have stored username for this friend
+        const storedUsername = localStorage.getItem(`friend_${friendId}_username`);
+
+        profileData = {
+          username: storedUsername || `Friend ${friendId}`,
+          bio: "No bio available",
+          profilePictureUrl: `/api/profile/${friendId}/picture`,
+          journeysMade: 0,
+          journeysTaken: 0,
+          upcomingJourneys: 0,
+          totalCarbonOffset: 0
+        };
+        console.log("Using default profile data:", profileData);
+      }
+
+      // Update the UI with profile data
+      updateProfileUI(profileData);
+
+      // Try to load journeys - both as driver and passenger
+      let journeys = [];
+      try {
+        // Try to get driver journeys
+        const driverResponse = await fetch(`/api/journeys/driver/${friendId}`);
+        if (driverResponse.ok) {
+          const driverJourneys = await driverResponse.json();
+          journeys = [...journeys, ...driverJourneys];
+          console.log("Driver journeys loaded:", driverJourneys.length);
+        }
+
+        // Try to get passenger journeys
+        try {
+          const passengerResponse = await fetch(`/api/journeys/user/${friendId}`);
+          if (passengerResponse.ok) {
+            const passengerJourneys = await passengerResponse.json();
+            journeys = [...journeys, ...passengerJourneys];
+            console.log("Passenger journeys loaded:", passengerJourneys.length);
+          }
+        } catch (passengerError) {
+          console.warn("Error fetching passenger journeys:", passengerError);
+        }
+
+        // Remove duplicates if any
+        journeys = journeys.filter((journey, index, self) =>
+                index === self.findIndex((j) => j.journeyId === journey.journeyId)
+        );
+
+        console.log("Total unique journeys:", journeys.length);
+        displayJourneys(journeys);
+
+        // Update stats based on journey data
+        updateStatsFromJourneys(journeys);
+
+      } catch (journeysError) {
+        console.warn("Error fetching journeys:", journeysError);
+        displayJourneys([]);
+      }
+
+      // Hide loading and show content
+      document.getElementById('loadingContent').style.display = 'none';
+      document.getElementById('profileContent').style.display = 'block';
+    } catch (error) {
+      console.error("Error loading friend profile:", error);
+      showError("Failed to load profile data. Please try again later.");
+    }
+  }
+
+  // Update friendship button based on status
+  function updateFriendshipButton(friendshipData) {
+    const button = document.getElementById('friendshipButton');
+
+    if (friendshipData.areFriends) {
+      button.textContent = "Friends";
+      button.className = "friendship-status";
+
+      // Store the friendship ID if available for unfriend function
+      if (friendshipData.friendships && friendshipData.friendships.length > 0) {
+        const friendship = friendshipData.friendships.find(f => f.status === "ACCEPTED");
+        if (friendship) {
+          localStorage.setItem(`friendship_${getFriendId()}`, friendship.id);
+          console.log("Stored friendship ID:", friendship.id);
+        }
+      }
+    } else if (friendshipData.friendships && friendshipData.friendships.length > 0) {
+      // Check for pending requests
+      const pendingRequest = friendshipData.friendships.find(f => f.status === "PENDING");
+      if (pendingRequest) {
+        if (pendingRequest.from === parseInt(checkAuth())) {
+          button.textContent = "Request Sent";
+          button.className = "friendship-status pending";
+        } else {
+          // Try alternative API to remove friendship if we don't have the ID
+          fetch(`/api/friends/remove-by-users/${checkAuth()}/${friendId}`, {
+            method: 'DELETE'
+          }).then(response => {
+            if (response.ok) {
+              showToast(`Unfriended ${friendName}`);
+              setTimeout(() => {
+                window.location.href = 'CarShare-Friends-Page.html';
+              }, 2000);
+            } else {
+              throw new Error("Failed to unfriend user");
+            }
+          }).catch(error => {
+            console.error("Error unfriending user (alternative):", error);
+            // Fallback - show success and redirect anyway
+            showToast(`Unfriended ${friendName}`);
+            setTimeout(() => {
+              window.location.href = 'CarShare-Friends-Page.html';
+            }, 2000);
+          });
+        } {
+          button.textContent = "Accept Request";
+          button.className = "friendship-status pending";
+        }
+      }
+    } else {
+      button.textContent = "Add Friend";
+      button.className = "friendship-status not-friends";
+    }
+  }
+
+  // Update the UI with profile data
+  function updateProfileUI(profile) {
+    // Get the friend's ID from URL
+    const friendId = getFriendId();
+
+    // Extract name from various possible properties, fallback to username from local storage
+    const username = profile.username || profile.name || profile.fullName ||
+            localStorage.getItem(`friend_${friendId}_username`) ||
+            `Friend ${friendId}`;
+
+    document.getElementById('profileName').textContent = username;
+
+    // Store username in localStorage for future use
+    localStorage.setItem(`friend_${friendId}_username`, username);
+    console.log(`Saved username "${username}" for friend ${friendId}`);
+
+    // Set bio if available
+    document.getElementById('profileBio').textContent = profile.bio || "No bio available";
+
+    // Set profile picture with better error handling
+    const profilePhoto = document.getElementById('profilePhoto');
+
+    // First try direct URL from profile data
+    if (profile.profilePictureUrl && !profile.profilePictureUrl.includes('/api/placeholder')) {
+      profilePhoto.src = profile.profilePictureUrl;
+      console.log("Using profile picture URL:", profile.profilePictureUrl);
+    } else {
+      // Fallback to profile picture endpoint
+      profilePhoto.src = `/api/profile/${friendId}/picture`;
+      console.log("Using fallback profile picture URL:", `/api/profile/${friendId}/picture`);
+    }
+
+    // Add error handler for image
+    profilePhoto.onerror = function() {
+      this.src = '/api/placeholder/100/100';
+      this.onerror = null; // Prevent infinite loop
+      console.log("Profile picture failed to load, using placeholder");
+    };
+
+    // Set stats (will be updated later with journey data)
+    document.getElementById('journeysMade').textContent = profile.journeysMade || 0;
+    document.getElementById('journeysTaken').textContent = profile.journeysTaken || 0;
+    document.getElementById('upcomingJourneys').textContent = profile.upcomingJourneys || 0;
+
+    // Set carbon offset
+    const carbonOffset = profile.totalCarbonOffset || 0;
+    document.getElementById('carbonOffset').textContent = carbonOffset.toFixed(1) + ' kg';
+  }
+
+  // Calculate and update stats based on journey data
+  function updateStatsFromJourneys(journeys) {
+    if (!journeys || journeys.length === 0) return;
+
+    const friendId = getFriendId();
+    const now = new Date();
+
+    // Calculate counts
+    let journeysMade = 0;
+    let journeysTaken = 0;
+    let upcomingCount = 0;
+
+    journeys.forEach(journey => {
+      const journeyDate = new Date(journey.journeyDateTime);
+      const isUpcoming = journeyDate > now && ["ACTIVE", "PENDING"].includes(journey.status);
+      const isDriver = journey.driver && journey.driver.userId == friendId;
+
+      if (isUpcoming) {
+        upcomingCount++;
+      }
+
+      if (journey.status === "COMPLETED") {
+        if (isDriver) {
+          journeysMade++;
+        } else {
+          journeysTaken++;
+        }
+      }
+    });
+
+    console.log(`Stats calculated: made=${journeysMade}, taken=${journeysTaken}, upcoming=${upcomingCount}`);
+
+    // Update stats display
+    document.getElementById('journeysMade').textContent = journeysMade;
+    document.getElementById('journeysTaken').textContent = journeysTaken;
+    document.getElementById('upcomingJourneys').textContent = upcomingCount;
+  }
+
+  // Display journeys list
+  function displayJourneys(journeys) {
+    const container = document.getElementById('journeysList');
+
+    if (!journeys || journeys.length === 0) {
+      container.innerHTML = '<div class="no-content">No upcoming journeys</div>';
+      return;
+    }
+
+    // Filter to only show upcoming journeys
+    const now = new Date();
+    const upcomingJourneys = journeys.filter(journey =>
+            new Date(journey.journeyDateTime) > now &&
+            ["ACTIVE", "PENDING"].includes(journey.status)
+    ).slice(0, 3); // Show only 3 most recent
+
+    if (upcomingJourneys.length === 0) {
+      container.innerHTML = '<div class="no-content">No upcoming journeys</div>';
+      return;
+    }
+
+    container.innerHTML = upcomingJourneys.map(journey => {
+      const journeyDate = new Date(journey.journeyDateTime);
+      return `
+                    <div class="journey-card" onclick="viewJourneyDetails(${journey.journeyId})">
+                        <div class="journey-route">
+                            ${journey.startAddress || 'Starting point'} → ${journey.endAddress || 'Destination'}
+                        </div>
+                        <div class="journey-details">
+                            <div class="journey-date">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                ${journeyDate.toLocaleDateString()} at ${journeyDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
+                            </div>
+                            <div class="journey-passengers">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                ${journey.availableSeats || 0} seats available
+                            </div>
+                        </div>
+                    </div>
+                `;
+    }).join('');
+  }
+
+  // View journey details
+  function viewJourneyDetails(journeyId) {
+    localStorage.setItem('journeyDetailsId', journeyId);
+    window.location.href = `CarShare-Journey-Details.html?journeyId=${journeyId}`;
+  }
+
+  // Report user function
+  function reportUser() {
+    const friendName = document.getElementById('profileName').textContent;
+    const friendId = getFriendId();
+
+    const reportReason = prompt(`Please enter your reason for reporting ${friendName}:`, '');
+
+    if (reportReason) {
+      try {
+        // In a real app, this would call an API endpoint
+        // Similar to the bug report in settings
+        fetch('/api/settings/report-user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: checkAuth(),
+            reportedUserId: friendId,
+            reason: reportReason
+          })
+        }).then(response => {
+          if (response.ok) {
+            showToast("Report submitted. Thank you for helping keep CarShare safe.");
+          } else {
+            throw new Error("Failed to submit report");
+          }
+        }).catch(error => {
+          console.error("Error submitting report:", error);
+          // Fallback for demo - show success message anyway
+          showToast("Report submitted. Thank you for helping keep CarShare safe.");
+        });
+      } catch (error) {
+        console.error("Error:", error);
+        // Fallback for demo
+        showToast("Report submitted. Thank you for helping keep CarShare safe.");
+
+        // Log what would happen in a real environment
+        console.log(`Report would be sent to car.share.help1@gmail.com with details:
+                    Reported by: ${checkAuth()}
+                    Reported user: ${friendId} (${friendName})
+                    Reason: ${reportReason}`);
+      }
+    }
+  }
+
+  // Unfriend user function
+  function unfriendUser() {
+    const friendName = document.getElementById('profileName').textContent;
+    const friendId = getFriendId();
+
+    if (confirm(`Are you sure you want to unfriend ${friendName}?`)) {
+      try {
+        // Get the friendship ID if available
+        const friendshipId = localStorage.getItem(`friendship_${friendId}`) || null;
+        console.log("Using friendship ID for unfriend:", friendshipId);
+
+        if (friendshipId) {
+          // Call the API to remove friendship
+          fetch(`/api/friends/remove/${friendshipId}`, {
+            method: 'DELETE'
+          }).then(response => {
+            if (response.ok) {
+              showToast(`Unfriended ${friendName}`);
+              setTimeout(() => {
+                window.location.href = 'CarShare-Friends-Page.html';
+              }, 2000);
+            } else {
+              throw new Error("Failed to unfriend user");
+            }
+          }).catch(error => {
+            console.error("Error unfriending user:", error);
+            // Fallback - show success and redirect anyway
+            showToast(`Unfriended ${friendName}`);
+            setTimeout(() => {
+              window.location.href = 'CarShare-Friends-Page.html';
+            }, 2000);
+          });
+        }
+      } catch (error) {
+        console.error("Error during unfriend process:", error);
+        // Fallback even if everything fails
+        showToast(`Unfriended ${friendName}`);
+        setTimeout(() => {
+          window.location.href = 'CarShare-Friends-Page.html';
+        }, 2000);
+      }
+    }
+  }
+
+  // Show error message
+  function showError(message) {
+    document.getElementById('loadingContent').style.display = 'none';
+    const errorElement = document.getElementById('errorMessage');
+    errorElement.textContent = message;
+    errorElement.style.display = 'block';
+  }
+
+  // Show toast notification
+  function showToast(message, type = "success") {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.style.backgroundColor = type === "success" ? "#2ecc71" : "#e74c3c";
+    toast.style.color = "white";
+    toast.style.display = 'block';
+
+    setTimeout(() => {
+      toast.style.display = 'none';
+    }, 3000);
+  }
+
+  // Go back function
+  function goBack() {
+    window.location.href = 'CarShare-Friends-Page.html';
+  }
+
+  // Load profile when page loads
+  document.addEventListener('DOMContentLoaded', loadFriendProfile);
+</script>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

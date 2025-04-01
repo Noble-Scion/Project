@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0739da91-08fa-4f58-a5dc-6c5ea3a7a455" name="Changes" comment="KAN-66: Add utility services for email and file storage">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uk/ac/qub/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/controller/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/ac/qub/controller/LoginResponse.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="feat-kiera-carprofile-intg" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,30 +86,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Build CSC3032-2425-TEAM23.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [dependencies].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CSC3032-2425-TEAM23 [:uk.ac.qub.CarShareApplication.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CSC3032-2425-TEAM23 [clean].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/callum-profile-management&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23/src/main/resources/static&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build CSC3032-2425-TEAM23.executor": "Run",
+    "Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [build].executor": "Run",
+    "Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [dependencies].executor": "Run",
+    "Gradle.CSC3032-2425-TEAM23 [:uk.ac.qub.CarShareApplication.main()].executor": "Run",
+    "Gradle.CSC3032-2425-TEAM23 [clean].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feat-kiera-friends-intg",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23/src/main/resources/static",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jamie\IdeaProjects\CSC3032-2425-TEAM23\src\main\resources\static" />
@@ -133,19 +131,28 @@
       <command value="gradle build" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.CarShareApplication">
-    <configuration name="CarShareApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="uk.ac.qub.CarShareApplication" />
-      <module name="CSC3032-2425-TEAM23.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="uk.ac.qub.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+  <component name="RunManager" selected="Gradle.CSC3032-2425-TEAM23 [build]">
+    <configuration name="CSC3032-2425-TEAM23 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
     </configuration>
     <configuration name="CSC3032-2425-TEAM23 [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -159,6 +166,28 @@
         <option name="taskNames">
           <list>
             <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="CSC3032-2425-TEAM23 [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--refresh-dependencies --write-locks" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="dependencies" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -222,11 +251,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.CSC3032-2425-TEAM23 [dependencies]" />
         <item itemvalue="Gradle.CSC3032-2425-TEAM23 [clean]" />
+        <item itemvalue="Gradle.CSC3032-2425-TEAM23 [build]" />
         <item itemvalue="Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [dependencies]" />
         <item itemvalue="Gradle.C:/Users/jamie/IdeaProjects/CSC3032-2425-TEAM23 [build]" />
-        <item itemvalue="Application.CarShareApplication" />
-        <item itemvalue="Gradle.CSC3032-2425-TEAM23 [clean]" />
       </list>
     </recent_temporary>
   </component>

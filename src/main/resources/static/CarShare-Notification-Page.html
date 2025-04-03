@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - CarShare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/bell.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .back-arrow {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            filter: invert(1);
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            position: relative;
+        }
+
+        .header-button:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+
+        .header-button:active {
+            transform: translateY(0);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .notifications-filter {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: white;
+            color: #666;
+        }
+
+        .filter-button.active {
+            background: #2C3E97;
+            color: white;
+        }
+
+        .notification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .notification-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notification-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .notification-card.unread {
+            background: #f8f9fa;
+            border-left-color: #3498db;
+        }
+
+        .notification-content {
+            flex-grow: 1;
+            padding-right: 20px;
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .notification-type {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .type-journey-started { background: #2ecc71; color: white; }
+        .type-journey-completed { background: #3498db; color: white; }
+        .type-journey-cancelled { background: #e74c3c; color: white; }
+        .type-driver-arrived { background: #f1c40f; color: #2c3e50; }
+        .type-passenger-cancelled { background: #e67e22; color: white; }
+        .type-journey-starting-soon { background: #9b59b6; color: white; }
+        .type-reward-unlocked { background: #1abc9c; color: white; }
+        .type-friend-request { background: #34495e; color: white; }
+
+        .notification-message {
+            color: #2c3e50;
+            margin: 5px 0;
+        }
+
+        .notification-time {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .notification-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-button {
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .action-button:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .notification-interactive-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .interactive-button {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .accept-button {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .accept-button:hover {
+            background: #27ae60;
+        }
+
+        .reject-button {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .reject-button:hover {
+            background: #c0392b;
+        }
+
+        .view-button {
+            background: #3498db;
+            color: white;
+        }
+
+        .view-button:hover {
+            background: #2980b9;
+        }
+
+        .no-notifications {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            background: white;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .no-notifications h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .notification-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .refresh-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .refresh-button.refreshing {
+            color: transparent;
+        }
+
+        .refresh-button.refreshing .refresh-spinner {
+            opacity: 1;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        nav {
+            background-color: #3498db;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-button {
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        /* Toast notification */
+        .toast-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            background: #2ecc71;
+            color: white;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast-notification.error {
+            background: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .notification-card {
+                padding: 15px;
+            }
+
+            .header-actions {
+                flex-direction: column;
+            }
+
+            .notifications-filter {
+                justify-content: center;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img src="images/back-button.png" alt="Back" class="back-arrow" onclick="goBack()">
+    <h1>Notifications</h1>
+    <div class="header-actions">
+        <button class="header-button" onclick="markAllAsRead()">
+            <svg class="notification-icon" viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+            Mark All Read
+        </button>
+        <button class="header-button refresh-button" onclick="refreshNotifications(this)">
+            <svg class="notification-icon" viewBox="0 0 24 24">
+                <path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+            </svg>
+            Refresh
+            <div class="refresh-spinner"></div>
+        </button>
+    </div>
+</header>
+
+<div class="main-content">
+    <div class="notifications-filter">
+        <button class="filter-button active" data-filter="all">All</button>
+        <button class="filter-button" data-filter="unread">Unread <span id="unreadBadge" class="badge" style="display: none;">0</span></button>
+        <button class="filter-button" data-filter="journey">Journey Updates</button>
+        <button class="filter-button" data-filter="driver">Driver Updates</button>
+        <button class="filter-button" data-filter="passenger">Passenger Updates</button>
+        <button class="filter-button" data-filter="friend">Friend Requests</button>
+        <button class="filter-button" data-filter="reward">Rewards</button>
+    </div>
+
+    <div class="notification-list" id="notificationList">
+        <!-- Notifications will be dynamically added here -->
+        <div class="loading-indicator" id="loadingIndicator" style="text-align: center; padding: 20px;">
+            <div style="display: inline-block; width: 40px; height: 40px; border: 4px solid rgba(0,0,0,0.1); border-radius: 50%; border-top-color: #3498db; animation: spin 1s linear infinite;"></div>
+            <p style="margin-top: 10px; color: #666;">Loading notifications...</p>
+        </div>
+    </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast-notification" id="toast">Notification marked as read</div>
+
+<nav>
+    <button class="nav-button" onclick="window.location.href='CarShare-Main-Page.html'">Create a Journey</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Join-a-Journey-Page.html'">Journeys</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Profile-Page.html'">My Profile</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Friends-Page.html'">Friends</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Notification-Page.html'">Notifications</button>
+    <button class="nav-button" onclick="window.location.href='CarShare-Settings-Page.html'">Settings</button>
+</nav>
+
+<script>
+    // Check if user is authenticated
+    function checkAuth() {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            window.location.href = 'CarShare-Login.html';
+        }
+        return userId;
+    }
+
+    // Global variables
+    let allNotifications = [];
+    let currentFilter = 'all';
+    let refreshing = false;
+
+    // Load notifications when the page loads
+    async function loadNotifications() {
+        const userId = checkAuth();
+
+        try {
+            document.getElementById('loadingIndicator').style.display = 'block';
+
+            // In a real app, this would be a server request
+            // For now, use a combination of API and simulated data
+            let notifications = [];
+
+            try {
+                // Try to fetch from server first
+                const response = await fetch(`/api/notifications/user/${userId}`);
+                if (response.ok) {
+                    notifications = await response.json();
+                    console.log("Fetched notifications:", notifications);
+                }
+            } catch (error) {
+                console.warn("Could not fetch from API, using simulated data", error);
+            }
+
+            // If no notifications from API or if empty, use simulated data
+            if (!notifications || notifications.length === 0) {
+                notifications = generateSampleNotifications();
+                console.log("Using simulated notifications:", notifications);
+            }
+
+            // Store notifications globally
+            allNotifications = notifications;
+
+            // Update unread count badge
+            updateUnreadBadge();
+
+            // Apply current filter
+            displayNotifications();
+
+        } catch (error) {
+            console.error('Error loading notifications:', error);
+            showToast('Failed to load notifications', 'error');
+        } finally {
+            document.getElementById('loadingIndicator').style.display = 'none';
+        }
+    }
+
+    // Generate sample notifications for demonstration
+    function generateSampleNotifications() {
+        const now = new Date();
+        const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+        const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000);
+        const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+        return [
+            {
+                id: 1,
+                type: "JOURNEY_STARTING_SOON",
+                message: "Your journey to Belfast City Centre starts in one hour at 14:00",
+                createdAt: oneHourAgo.toISOString(),
+                read: false,
+                metadata: {
+                    journeyId: 123,
+                    driverName: "John Smith"
+                }
+            },
+            {
+                id: 2,
+                type: "DRIVER_ARRIVED",
+                message: "Your driver Sarah has arrived at Queen's University Main Entrance",
+                createdAt: twoHoursAgo.toISOString(),
+                read: false,
+                metadata: {
+                    journeyId: 124,
+                    driverName: "Sarah Connor",
+                    location: "Queen's University Main Entrance"
+                }
+            },
+            {
+                id: 3,
+                type: "PASSENGER_CANCELLED",
+                message: "Passenger Michael has cancelled their participation in your journey",
+                createdAt: yesterday.toISOString(),
+                read: true,
+                metadata: {
+                    journeyId: 125,
+                    passengerName: "Michael Brown"
+                }
+            },
+            {
+                id: 4,
+                type: "JOURNEY_CANCELLED",
+                message: "Your journey with David has been cancelled. Reason: Weather conditions",
+                createdAt: yesterday.toISOString(),
+                read: false,
+                metadata: {
+                    journeyId: 126,
+                    driverName: "David Jones",
+                    reason: "Weather conditions"
+                }
+            },
+            {
+                id: 5,
+                type: "JOURNEY_COMPLETED",
+                message: "Your journey to Titanic Belfast has been completed successfully",
+                createdAt: new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+                read: true,
+                metadata: {
+                    journeyId: 127,
+                    destination: "Titanic Belfast"
+                }
+            },
+            {
+                id: 6,
+                type: "REWARD_UNLOCKED",
+                message: "Congratulations! You've unlocked the Green Commuter badge by offsetting 10kg of CO₂",
+                createdAt: new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                read: false,
+                metadata: {
+                    rewardId: 2,
+                    rewardName: "Green Commuter",
+                    carbonOffset: 10
+                }
+            },
+            {
+                id: 7,
+                type: "FRIEND_REQUEST",
+                message: "Emma has sent you a friend request",
+                createdAt: new Date(now.getTime() - 12 * 60 * 60 * 1000).toISOString(),
+                read: false,
+                metadata: {
+                    requestId: 456,
+                    userId: 789,
+                    username: "Emma Wilson"
+                }
+            },
+            {
+                id: 8,
+                type: "JOURNEY_STARTED",
+                message: "Your journey with Thomas has started",
+                createdAt: new Date(now.getTime() - 30 * 60 * 1000).toISOString(),
+                read: false,
+                metadata: {
+                    journeyId: 128,
+                    driverName: "Thomas Anderson"
+                }
+            }
+        ];
+    }
+
+    // Display notifications based on current filter
+    function displayNotifications() {
+        const container = document.getElementById('notificationList');
+        const filteredNotifications = filterNotifications(allNotifications, currentFilter);
+
+        // Clear container except for loading indicator
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        container.innerHTML = '';
+        container.appendChild(loadingIndicator);
+
+        if (!filteredNotifications || filteredNotifications.length === 0) {
+            const emptyState = document.createElement('div');
+            emptyState.className = 'no-notifications';
+            emptyState.innerHTML = `
+                <h3>No ${currentFilter === 'all' ? '' : currentFilter} notifications</h3>
+                <p>${currentFilter === 'all' ? 'You don\'t have any notifications yet.' : 'No notifications in this category.'}</p>
+            `;
+            container.appendChild(emptyState);
+            return;
+        }
+
+        filteredNotifications.forEach(notification => {
+            const card = createNotificationCard(notification);
+            container.appendChild(card);
+        });
+    }
+
+    // Create notification card element
+    function createNotificationCard(notification) {
+        const card = document.createElement('div');
+        card.className = `notification-card ${notification.read ? '' : 'unread'}`;
+        card.dataset.id = notification.id;
+
+        // Create notification type label
+        const typeLabel = formatType(notification.type);
+        const typeClass = `type-${notification.type.toLowerCase()}`;
+
+        let interactiveActionsHTML = '';
+
+        // Add interactive elements based on notification type
+        if (notification.type === "FRIEND_REQUEST" && !notification.read) {
+            interactiveActionsHTML = `
+                <div class="notification-interactive-actions">
+                    <button class="interactive-button accept-button" onclick="acceptFriendRequest(${notification.id}, ${notification.metadata?.requestId || 0})">Accept</button>
+                    <button class="interactive-button reject-button" onclick="rejectFriendRequest(${notification.id}, ${notification.metadata?.requestId || 0})">Decline</button>
+                </div>
+            `;
+        } else if (notification.type === "JOURNEY_STARTING_SOON" ||
+            notification.type === "JOURNEY_STARTED" ||
+            notification.type === "DRIVER_ARRIVED") {
+            interactiveActionsHTML = `
+                <div class="notification-interactive-actions">
+                    <button class="interactive-button view-button" onclick="viewJourney(${notification.id}, ${notification.metadata?.journeyId || 0})">View Journey</button>
+                </div>
+            `;
+        } else if (notification.type === "REWARD_UNLOCKED") {
+            interactiveActionsHTML = `
+                <div class="notification-interactive-actions">
+                    <button class="interactive-button view-button" onclick="viewRewards(${notification.id})">View Rewards</button>
+                </div>
+            `;
+        }
+
+        card.innerHTML = `
+            <div class="notification-content">
+                <div class="notification-header">
+                    <span class="notification-type ${typeClass}">${typeLabel}</span>
+                </div>
+                <p class="notification-message">${notification.message}</p>
+                <div class="notification-time">${formatTime(notification.createdAt)}</div>
+                ${interactiveActionsHTML}
+            </div>
+            <div class="notification-actions">
+                ${notification.read ? '' :
+            `<button class="action-button" onclick="event.stopPropagation(); markAsRead(${notification.id})">
+                    Mark as read
+                </button>`}
+            </div>
+        `;
+
+        // Add click event to mark as read
+        if (!notification.read) {
+            card.addEventListener('click', () => markAsRead(notification.id));
+        }
+
+        return card;
+    }
+
+    // Filter notifications based on selected filter
+    function filterNotifications(notifications, filter) {
+        if (!notifications) return [];
+
+        switch(filter) {
+            case 'unread':
+                return notifications.filter(n => !n.read);
+            case 'journey':
+                return notifications.filter(n =>
+                    ['JOURNEY_STARTED', 'JOURNEY_COMPLETED', 'JOURNEY_CANCELLED', 'JOURNEY_STARTING_SOON'].includes(n.type)
+                );
+            case 'driver':
+                return notifications.filter(n =>
+                    ['DRIVER_ARRIVED'].includes(n.type)
+                );
+            case 'passenger':
+                return notifications.filter(n =>
+                    ['PASSENGER_CANCELLED'].includes(n.type)
+                );
+            case 'friend':
+                return notifications.filter(n =>
+                    ['FRIEND_REQUEST'].includes(n.type)
+                );
+            case 'reward':
+                return notifications.filter(n =>
+                    ['REWARD_UNLOCKED'].includes(n.type)
+                );
+            default:
+                return notifications;
+        }
+    }
+
+    // Format notification type for display
+    function formatType(type) {
+        const formattedTypes = {
+            'JOURNEY_STARTED': 'Journey Started',
+            'JOURNEY_COMPLETED': 'Journey Completed',
+            'JOURNEY_CANCELLED': 'Journey Cancelled',
+            'DRIVER_ARRIVED': 'Driver Arrived',
+            'PASSENGER_CANCELLED': 'Passenger Cancelled',
+            'JOURNEY_STARTING_SOON': 'Journey Starting Soon',
+            'REWARD_UNLOCKED': 'Reward Unlocked',
+            'FRIEND_REQUEST': 'Friend Request'
+        };
+
+        return formattedTypes[type] || type.split('_').map(word =>
+            word.charAt(0) + word.slice(1).toLowerCase()
+        ).join(' ');
+    }
+
+    // Format time for display
+    function formatTime(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diff = now - date;
+
+        // Less than 1 minute ago
+        if (diff < 60000) {
+            return 'Just now';
+        }
+
+        // Less than 1 hour ago
+        if (diff < 3600000) {
+            const minutes = Math.floor(diff / 60000);
+            return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+        }
+
+        // Less than 24 hours ago
+        if (diff < 86400000) {
+            const hours = Math.floor(diff / 3600000);
+            return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+        }
+
+        // Less than 7 days ago
+        if (diff < 604800000) {
+            const days = Math.floor(diff / 86400000);
+            return `${days} day${days !== 1 ? 's' : ''} ago`;
+        }
+
+        // Otherwise show full date
+        return date.toLocaleDateString();
+    }// Mark notification as read
+    async function markAsRead(notificationId) {
+        try {
+            // Find notification in our array
+            const notification = allNotifications.find(n => n.id === notificationId);
+            if (!notification || notification.read) return;
+
+            // Try to update on server
+            try {
+                const response = await fetch(`/api/notifications/mark-read/${notificationId}`, {
+                    method: 'POST'
+                });
+
+                if (!response.ok) {
+                    console.warn(`Server update failed for notification ${notificationId}`);
+                    // Continue anyway since we'll update UI optimistically
+                }
+            } catch (error) {
+                console.warn(`API error for notification ${notificationId}:`, error);
+                // Continue anyway
+            }
+
+            // Update locally
+            notification.read = true;
+
+            // Update UI
+            const card = document.querySelector(`.notification-card[data-id="${notificationId}"]`);
+            if (card) {
+                card.classList.remove('unread');
+                const actionButton = card.querySelector('.action-button');
+                if (actionButton) {
+                    actionButton.remove();
+                }
+            }
+
+            // Update unread count
+            updateUnreadBadge();
+
+            // Show toast
+            showToast('Notification marked as read');
+
+            // If current filter is 'unread', refresh the list
+            if (currentFilter === 'unread') {
+                displayNotifications();
+            }
+
+        } catch (error) {
+            console.error('Error marking notification as read:', error);
+            showToast('Failed to mark notification as read', 'error');
+        }
+    }
+
+    // Mark all notifications as read
+    async function markAllAsRead() {
+        const userId = checkAuth();
+
+        try {
+            // Try to update on server
+            try {
+                const response = await fetch(`/api/notifications/mark-all-read/${userId}`, {
+                    method: 'POST'
+                });
+
+                if (!response.ok) {
+                    console.warn('Server update failed for mark all read');
+                    // Continue anyway
+                }
+            } catch (error) {
+                console.warn('API error for mark all read:', error);
+                // Continue anyway
+            }
+
+            // Update locally
+            allNotifications.forEach(notification => {
+                notification.read = true;
+            });
+
+            // Update UI
+            displayNotifications();
+            updateUnreadBadge();
+
+            // Show toast
+            showToast('All notifications marked as read');
+
+        } catch (error) {
+            console.error('Error marking all notifications as read:', error);
+            showToast('Failed to mark all as read', 'error');
+        }
+    }
+
+    // Update unread count badge
+    function updateUnreadBadge() {
+        const unreadCount = allNotifications.filter(n => !n.read).length;
+        const badge = document.getElementById('unreadBadge');
+
+        if (unreadCount > 0) {
+            badge.textContent = unreadCount;
+            badge.style.display = 'inline-flex';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    // Refresh notifications
+    async function refreshNotifications(button) {
+        if (refreshing) return;
+
+        refreshing = true;
+        button.classList.add('refreshing');
+
+        try {
+            await loadNotifications();
+            showToast('Notifications refreshed');
+        } catch (error) {
+            console.error('Error refreshing notifications:', error);
+            showToast('Failed to refresh notifications', 'error');
+        } finally {
+            refreshing = false;
+            button.classList.remove('refreshing');
+        }
+    }
+
+    // Show toast notification
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = type === 'success'
+            ? 'toast-notification show'
+            : 'toast-notification show error';
+
+        setTimeout(() => {
+            toast.className = 'toast-notification';
+        }, 3000);
+    }
+
+    // Accept friend request
+    async function acceptFriendRequest(notificationId, requestId) {
+        event.stopPropagation(); // Prevent card click event
+
+        try {
+            // Try to call API
+            try {
+                const response = await fetch(`/api/friends/accept/${requestId}`, {
+                    method: 'POST'
+                });
+
+                if (!response.ok) {
+                    console.warn(`Server update failed for accepting friend request ${requestId}`);
+                }
+            } catch (error) {
+                console.warn(`API error for accepting friend request ${requestId}:`, error);
+            }
+
+            // Mark notification as read
+            await markAsRead(notificationId);
+
+            // Show success message
+            showToast('Friend request accepted');
+
+            // Reload or update UI
+            const notification = allNotifications.find(n => n.id === notificationId);
+            if (notification && notification.metadata) {
+                const friendName = notification.metadata.username;
+
+                // Replace action buttons with confirmation
+                const card = document.querySelector(`.notification-card[data-id="${notificationId}"]`);
+                if (card) {
+                    const actionsContainer = card.querySelector('.notification-interactive-actions');
+                    if (actionsContainer) {
+                        actionsContainer.innerHTML = `<p style="color: #2ecc71;">You are now friends with ${friendName}</p>`;
+                    }
+                }
+            }
+
+        } catch (error) {
+            console.error('Error accepting friend request:', error);
+            showToast('Failed to accept friend request', 'error');
+        }
+    }
+
+    // Reject friend request
+    async function rejectFriendRequest(notificationId, requestId) {
+        event.stopPropagation(); // Prevent card click event
+
+        try {
+            // Try to call API
+            try {
+                const response = await fetch(`/api/friends/reject/${requestId}`, {
+                    method: 'POST'
+                });
+
+                if (!response.ok) {
+                    console.warn(`Server update failed for rejecting friend request ${requestId}`);
+                }
+            } catch (error) {
+                console.warn(`API error for rejecting friend request ${requestId}:`, error);
+            }
+
+            // Mark notification as read
+            await markAsRead(notificationId);
+
+            // Show message
+            showToast('Friend request declined');
+
+            // Update UI
+            const notification = allNotifications.find(n => n.id === notificationId);
+            if (notification && notification.metadata) {
+                const friendName = notification.metadata.username;
+
+                // Replace action buttons with confirmation
+                const card = document.querySelector(`.notification-card[data-id="${notificationId}"]`);
+                if (card) {
+                    const actionsContainer = card.querySelector('.notification-interactive-actions');
+                    if (actionsContainer) {
+                        actionsContainer.innerHTML = `<p style="color: #e74c3c;">Friend request declined</p>`;
+                    }
+                }
+            }
+
+        } catch (error) {
+            console.error('Error rejecting friend request:', error);
+            showToast('Failed to reject friend request', 'error');
+        }
+    }
+
+    // View journey details
+    function viewJourney(notificationId, journeyId) {
+        event.stopPropagation(); // Prevent card click event
+
+        // Mark notification as read
+        markAsRead(notificationId);
+
+        // Find notification to determine view type
+        const notification = allNotifications.find(n => n.id === notificationId);
+
+        if (notification) {
+            if (notification.type === "JOURNEY_STARTING_SOON" ||
+                notification.type === "JOURNEY_STARTED" ||
+                notification.type === "DRIVER_ARRIVED") {
+
+                // Set journey details in localStorage if available
+                const journeyData = {
+                    journeyId: journeyId
+                };
+
+                localStorage.setItem('journeyDetailsId', journeyId);
+
+                // Check if user is driver or passenger
+                const userId = checkAuth();
+                const isDriver = notification.metadata?.driverId === parseInt(userId);
+
+                // Redirect to appropriate page
+                if (isDriver) {
+                    window.location.href = `CarShare-Live-Journey.html?journeyId=${journeyId}`;
+                } else {
+                    window.location.href = `CarShare-Passenger-Journey.html?journeyId=${journeyId}`;
+                }
+            }
+        }
+    }
+
+    // View rewards page
+    function viewRewards(notificationId) {
+        event.stopPropagation(); // Prevent card click event
+
+        // Mark notification as read
+        markAsRead(notificationId);
+
+        // Navigate to rewards page
+        window.location.href = 'CarShare-Rewards-Page.html';
+    }
+
+    // Go back to previous page
+    function goBack() {
+        window.history.back();
+    }
+
+    // Initialize filter buttons
+    function initializeFilterButtons() {
+        const buttons = document.querySelectorAll('.filter-button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                buttons.forEach(btn => btn.classList.remove('active'));
+
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                // Update current filter
+                currentFilter = button.dataset.filter;
+
+                // Display filtered notifications
+                displayNotifications();
+            });
+        });
+    }
+
+    // Poll for new notifications (in a real app)
+    function startNotificationPolling() {
+        // In a real app, this would check for new notifications every minute
+        setInterval(async () => {
+            if (!refreshing) {
+                // In a production app, we would use a more efficient endpoint
+                // that only returns new notifications since last check
+
+                // Simulate by checking if we're not on this page
+                if (document.visibilityState === 'hidden') {
+                    // Count before
+                    const unreadBefore = allNotifications.filter(n => !n.read).length;
+
+                    try {
+                        // Quietly check for new notifications
+                        const userId = checkAuth();
+                        const response = await fetch(`/api/notifications/user/${userId}`);
+
+                        if (response.ok) {
+                            const freshNotifications = await response.json();
+
+                            // Check if we have any new notifications
+                            if (freshNotifications.length > allNotifications.length) {
+                                // Update our local cache
+                                allNotifications = freshNotifications;
+
+                                // Update badge
+                                updateUnreadBadge();
+
+                                // When user returns to page, refresh the display
+                                document.addEventListener('visibilitychange', function onVisibilityChange() {
+                                    if (document.visibilityState === 'visible') {
+                                        displayNotifications();
+                                        document.removeEventListener('visibilitychange', onVisibilityChange);
+                                    }
+                                });
+                            }
+                        }
+                    } catch (error) {
+                        console.warn('Background notification check failed:', error);
+                    }
+                }
+            }
+        }, 60000); // Check every minute
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        // Check authentication
+        checkAuth();
+
+        // Set up filter buttons
+        initializeFilterButtons();
+
+        // Load notifications
+        loadNotifications();
+
+        // Start polling for new notifications
+        startNotificationPolling();
+    });
+</script>
+</body>
+</html>
